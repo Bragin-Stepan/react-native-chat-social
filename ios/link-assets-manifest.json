@@ -1,0 +1,61 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "assets/fonts/Roboto-Bold.ttf",
+      "sha1": "1e8baa650d943f2b78f1b77dbfe3ba1fb590e21a"
+    },
+    {
+      "path": "assets/fonts/Roboto-Italic.ttf",
+      "sha1": "01593eb48207734fd1e06e1eb91227d1117ba1e7"
+    },
+    {
+      "path": "assets/fonts/Roboto-Light.ttf",
+      "sha1": "02970068cbc5b4daf5b530e994a5b6f547d03bc1"
+    },
+    {
+      "path": "assets/fonts/Roboto-Medium.ttf",
+      "sha1": "0ee6b0bd5ff6fe30e4ef720a08e38656dc60985f"
+    },
+    {
+      "path": "assets/fonts/Roboto-Regular.ttf",
+      "sha1": "ce57fc6c6705cb20661ac325fac5d4598b6efbca"
+    },
+    {
+      "path": "assets/fonts/Roboto-Thin.ttf",
+      "sha1": "07ade56a94bbca87948ce7878a0b14a1df9bb87a"
+    },
+    {
+      "path": "assets/icons/chat_fill.png",
+      "sha1": "096860db3ee4d0f0e29111f720c8a6e3c40a5eef"
+    },
+    {
+      "path": "assets/icons/chat_outline.png",
+      "sha1": "4c4a895d795b2935825bb98f4849adad6b07bf1c"
+    },
+    {
+      "path": "assets/icons/home_fill.png",
+      "sha1": "e5c1b2d989f9b20d190ddfacf600db679ad96fa2"
+    },
+    {
+      "path": "assets/icons/home_outline.png",
+      "sha1": "7336f2f78852c638ffc85b5c79695b88c575a9a5"
+    },
+    {
+      "path": "assets/icons/profile_fill.png",
+      "sha1": "9653781b900d6043c15ec4e7591405742aab3fd4"
+    },
+    {
+      "path": "assets/icons/profile_outline.png",
+      "sha1": "816ea690e10db4e252be9ed06e2567fddfc41019"
+    },
+    {
+      "path": "assets/icons/search_fill.png",
+      "sha1": "dd041f4f16535b43015a02c21f307b616f8e587b"
+    },
+    {
+      "path": "assets/icons/search_outline.png",
+      "sha1": "6b629dbd2495421c15ca975e20bcb9edce565b25"
+    }
+  ]
+}

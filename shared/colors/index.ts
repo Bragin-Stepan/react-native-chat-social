@@ -1,0 +1,28 @@
+export default {
+  dark: {
+    base_primary_dark: '#FFFFFF',
+    base_primary_normal: '#F4F4F9',
+    base_primary_light: '#DFDFE5',
+    base_secondary_dark: '#767686',
+    base_secondary_normal: '#1F1F23',
+    base_secondary_light: '#181819',
+    system_alert_normal: '#EE3235',
+    system_alert_secondary: '#403030',
+    system_verified_normal: '#438EFF',
+    system_verified_secondary: '#1A2436',
+    system_success_normal: '#51C780',
+  },
+  light: {
+    base_primary_dark: '#171717',
+    base_primary_normal: '#5B5B63',
+    base_primary_light: '#878790',
+    base_secondary_dark: '#CBC8D9',
+    base_secondary_normal: '#F6F7FF',
+    base_secondary_light: '#FFFFFF',
+    system_alert_normal: '#EE3235',
+    system_alert_secondary: '#FFDDDD',
+    system_verified_normal: '#438EFF',
+    system_verified_secondary: '#8FC9FF',
+    system_success_normal: '#51C780',
+  },
+};

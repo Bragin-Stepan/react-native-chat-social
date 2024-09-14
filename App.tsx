@@ -1,118 +1,103 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
-
 import React from 'react';
-import type {PropsWithChildren} from 'react';
 import {
   SafeAreaView,
-  ScrollView,
   StatusBar,
-  StyleSheet,
-  Text,
   useColorScheme,
-  View,
+  Image,
+  Text,
 } from 'react-native';
-
-import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
-
-type SectionProps = PropsWithChildren<{
-  title: string;
-}>;
-
-function Section({children, title}: SectionProps): React.JSX.Element {
-  const isDarkMode = useColorScheme() === 'dark';
-  return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
-  );
-}
+import {BottomNavigation} from 'react-native-paper';
+import useAppColor from './shared/colors/useColor';
+import {ChatsComponent} from './components/tabs/Chats';
+import fonts from './shared/fonts';
+import icons from './shared/icons';
 
 function App(): React.JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
+  const appColor = useAppColor();
 
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
+  // Экраны
+  const FeedRoute = () => <Text>Главная</Text>;
+  const SearchRoute = () => <Text>Поиск</Text>;
+  const ProfileRoute = () => <Text>Профиль</Text>;
+
+  // Навбар
+  const [index, setIndex] = React.useState(0);
+  const [routes] = React.useState([
+    {
+      key: 'feed',
+      title: '',
+      focusedIcon: () => icons.home_fill,
+      unfocusedIcon: () => icons.home_outline,
+    },
+    {
+      key: 'search',
+      title: '',
+      focusedIcon: () => icons.search_fill,
+      unfocusedIcon: () => icons.search_outline,
+    },
+    {
+      key: 'chat',
+      title: '',
+      focusedIcon: () => icons.chat_fill,
+      unfocusedIcon: () => icons.chat_outline,
+    },
+    {
+      key: 'profile',
+      title: '',
+      focusedIcon: () => icons.profile_fill,
+      unfocusedIcon: () => icons.profile_outline,
+    },
+  ]);
+
+  const renderScene = BottomNavigation.SceneMap({
+    feed: FeedRoute,
+    search: SearchRoute,
+    chat: ChatsComponent,
+    profile: ProfileRoute,
+  });
 
   return (
-    <SafeAreaView style={backgroundStyle}>
+    <SafeAreaView
+      style={{
+        height: '100%',
+        flex: 1,
+        backgroundColor: appColor.base_secondary_light,
+      }}>
       <StatusBar
         barStyle={isDarkMode ? 'light-content' : 'dark-content'}
-        backgroundColor={backgroundStyle.backgroundColor}
+        backgroundColor={appColor.base_secondary_light}
       />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
+      <BottomNavigation
+        navigationState={{index, routes}}
+        onIndexChange={setIndex}
+        renderScene={renderScene}
+        // Style
+        // renderLabel={({route, focused}) => (
+        //   <Text
+        //     style={{
+        //       fontFamily: fonts.bold,
+        //       fontSize: 10,
+        //       marginTop: 4,
+        //       color: focused
+        //         ? appColor.base_primary_dark
+        //         : appColor.base_primary_light,
+        //       textAlign: 'center',
+        //     }}>
+        //     {route.title}
+        //   </Text>
+        // )}
+        activeIndicatorStyle={{backgroundColor: appColor.base_secondary_light}}
+        barStyle={{
+          backgroundColor: appColor.base_secondary_light,
+          borderTopWidth: 2,
+          borderColor: appColor.base_secondary_normal,
+          height: 80,
+          // marginBottom: 20,
+        }}
+      />
     </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-});
 
 export default App;
