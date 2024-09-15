@@ -1,5 +1,6 @@
 export default {
   dark: {
+    brand_primary_normal: '#7C65FF',
     base_primary_dark: '#FFFFFF',
     base_primary_normal: '#F4F4F9',
     base_primary_light: '#DFDFE5',
@@ -13,6 +14,7 @@ export default {
     system_success_normal: '#51C780',
   },
   light: {
+    brand_primary_normal: '#7C65FF',
     base_primary_dark: '#171717',
     base_primary_normal: '#5B5B63',
     base_primary_light: '#878790',

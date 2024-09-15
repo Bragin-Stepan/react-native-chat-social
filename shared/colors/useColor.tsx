@@ -1,6 +1,6 @@
 import React from 'react';
 import {useColorScheme} from 'react-native';
-import colors from '.';
+import colors from './colors';
 
 const useAppColor = () => {
   const appMode = useColorScheme() ? 'light' : 'dark';

@@ -1,8 +1,6 @@
 export default {
   bold: 'Roboto-Bold',
-  regular: 'Roboto-Regular',
   medium: 'Roboto-Medium',
-  light: 'Roboto-Light',
-  thin: 'Roboto-Thin',
+  regular: 'Roboto-Regular',
   italic: 'Roboto-Italic',
 };
