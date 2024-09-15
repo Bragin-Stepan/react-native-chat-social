@@ -2,14 +2,15 @@ import React from 'react';
 import {Text, View, TextInput, StyleSheet} from 'react-native';
 
 import fonts from '../shared/fonts';
-import {IWText, IWView} from './types';
+import {IWView} from './types';
+// import {IWText} from './types';
 import useAppColor from './colors/useColor';
 import textStyles from './textStyles';
 import {borderRadius} from './sizes';
 import {padding} from './sizes';
 
 // ======== Text ========
-export const WText = React.memo((props: IWText) => {
+export const WText = React.memo((props: any) => {
   const appColor = useAppColor();
 
   return (
@@ -67,7 +68,7 @@ export const WInput = React.memo((props: any) => {
             flex: 1,
           },
           props.style,
-          textStyles.caption.C1,
+          textStyles.C1,
         ]}
         selectionColor={appColor.brand_primary_normal}
         placeholderTextColor={appColor.base_secondary_dark}
