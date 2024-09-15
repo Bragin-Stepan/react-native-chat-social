@@ -9,7 +9,7 @@ const DefaultRoute = React.memo((props: any) => {
       <HeaderComponent
         iconsLeft={[icons.arrow_left]}
         title="Чаты"
-        // inputText="Найти чат..."
+        // placeholder="Найти чат..."
         iconsRight={[icons.arrow_left]}
       />
       <WText>Первый экран в чатах</WText>

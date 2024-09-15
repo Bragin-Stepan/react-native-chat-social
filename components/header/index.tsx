@@ -1,6 +1,5 @@
 import React from 'react';
-
-import {View, Text, StyleSheet} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 import {WText} from '../../shared/themed';
 import HeaderSearch from './HeaderSearch';
 import {HeaderIconsLeft, HeaderIconsRight} from './HeaderIcons';
@@ -9,8 +8,16 @@ import textStyles from '../../shared/textStyles';
 import useAppColor from '../../shared/colors/useColor';
 import {padding} from '../../shared/sizes';
 
-const HeaderComponent = React.memo((props: any) => {
+interface HeaderComponentProps {
+  iconsLeft?: any;
+  title?: string;
+  placeholder?: string;
+  iconsRight?: any;
+}
+
+const HeaderComponent = React.memo((props: HeaderComponentProps) => {
   const appColor = useAppColor();
+
   return (
     <View style={styles.headerStyle}>
       {/* ======== Icons Left ======== */}
@@ -20,7 +27,7 @@ const HeaderComponent = React.memo((props: any) => {
       {props.title && (
         <WText
           style={[
-            textStyles.title.T1,
+            textStyles.T1,
             styles.headerTitle,
             {color: appColor.base_primary_dark},
           ]}
@@ -31,7 +38,7 @@ const HeaderComponent = React.memo((props: any) => {
       )}
 
       {/* ======== Search ======== */}
-      {props.inputText && <HeaderSearch placeholder={props.inputText} />}
+      {props.placeholder && <HeaderSearch placeholder={props.placeholder} />}
 
       {/* ======== Icons Right ======== */}
       {props.iconsRight && <HeaderIconsRight iconsRight={props.iconsRight} />}
@@ -41,9 +48,7 @@ const HeaderComponent = React.memo((props: any) => {
 
 // ======== Стили ========
 const styles = StyleSheet.create({
-  // ======== Header ========
   headerStyle: {
-    // backgroundColor: 'gray',
     height: 80,
     flexDirection: 'row',
     justifyContent: 'space-between',
