@@ -10,20 +10,12 @@
       "sha1": "01593eb48207734fd1e06e1eb91227d1117ba1e7"
     },
     {
-      "path": "assets/fonts/Roboto-Light.ttf",
-      "sha1": "02970068cbc5b4daf5b530e994a5b6f547d03bc1"
-    },
-    {
       "path": "assets/fonts/Roboto-Medium.ttf",
       "sha1": "0ee6b0bd5ff6fe30e4ef720a08e38656dc60985f"
     },
     {
       "path": "assets/fonts/Roboto-Regular.ttf",
       "sha1": "ce57fc6c6705cb20661ac325fac5d4598b6efbca"
-    },
-    {
-      "path": "assets/fonts/Roboto-Thin.ttf",
-      "sha1": "07ade56a94bbca87948ce7878a0b14a1df9bb87a"
     },
     {
       "path": "assets/icons/chat_fill.png",
@@ -56,6 +48,14 @@
     {
       "path": "assets/icons/search_outline.png",
       "sha1": "6b629dbd2495421c15ca975e20bcb9edce565b25"
+    },
+    {
+      "path": "assets/icons/system/arrow_left.png",
+      "sha1": "44f8860a5e9d99e10667334b2c27db646abef5d6"
+    },
+    {
+      "path": "assets/icons/system/search.png",
+      "sha1": "dc32bef3499f7ba99af6629a524b69adb044d74e"
     }
   ]
 }

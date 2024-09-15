@@ -62,4 +62,10 @@ export default {
       style={{width: iconSmallSize, height: iconSmallSize}}
     />
   ),
+  search: (
+    <Image
+      source={iconSources.Search}
+      style={{width: iconSmallSize, height: iconSmallSize}}
+    />
+  ),
 };

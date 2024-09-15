@@ -13,7 +13,3 @@ export interface IWText extends TextProps {
 export interface IWView extends ViewProps {
   isParrent?: boolean;
 }
-
-export interface IWInput extends TextInputProps {
-  fontFamily?: keyof typeof fonts;
-}

@@ -1,8 +1,8 @@
 import React from 'react';
-import {Text, View, TextInput} from 'react-native';
+import {Text, View, TextInput, StyleSheet} from 'react-native';
 
 import fonts from '../shared/fonts';
-import {IWText, IWView, IWInput} from './types';
+import {IWText, IWView} from './types';
 import useAppColor from './colors/useColor';
 import textStyles from './textStyles';
 import {borderRadius} from './sizes';
@@ -39,26 +39,69 @@ export const WView = React.memo((props: IWView) => {
 });
 
 // ======== Input ========
-export const WInput = React.memo((props: IWInput) => {
+export const WInput = React.memo((props: any) => {
   const appColor = useAppColor();
 
   return (
-    <TextInput
-      {...props}
-      style={[
-        {
-          color: appColor.base_primary_dark,
-        },
-        props.style,
-        {
-          backgroundColor: appColor.base_secondary_normal,
-          borderRadius: borderRadius.md,
-          paddingHorizontal: padding.lg,
-        },
-        textStyles.caption.C1,
-      ]}
-      selectionColor={appColor.brand_primary_normal}
-      placeholderTextColor={appColor.base_secondary_dark}
-    />
+    <View style={styles.inputContainer}>
+      {/* Icons Left */}
+      {props.iconsLeft && (
+        <View style={[{marginLeft: padding.md}, styles.iconsContainer]}>
+          {props.iconsLeft.map((icon: any, index: number) => (
+            <View key={index} style={styles.iconWrapper}>
+              {icon}
+            </View>
+          ))}
+        </View>
+      )}
+
+      {/* Input Field */}
+      <TextInput
+        {...props}
+        style={[
+          {
+            color: appColor.base_primary_dark,
+            backgroundColor: appColor.base_secondary_normal,
+            borderRadius: borderRadius.md,
+            paddingHorizontal: props.iconsLeft ? null : padding.lg,
+            flex: 1,
+          },
+          props.style,
+          textStyles.caption.C1,
+        ]}
+        selectionColor={appColor.brand_primary_normal}
+        placeholderTextColor={appColor.base_secondary_dark}
+      />
+
+      {/* Icons Right */}
+      {props.iconsRight && (
+        <View style={[{marginRight: padding.md}, styles.iconsContainer]}>
+          {props.iconsRight.map((icon: any, index: number) => (
+            <View key={index} style={styles.iconWrapper}>
+              {icon}
+            </View>
+          ))}
+        </View>
+      )}
+    </View>
   );
+});
+
+// ======== Стили ========
+const styles = StyleSheet.create({
+  inputContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  iconsContainer: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  iconWrapper: {
+    height: 40,
+    width: 40,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
 });

@@ -1,7 +1,6 @@
 import React from 'react';
-import {Image} from 'react-native';
 import {WText, WView} from '../../shared/themed';
-import {HeaderComponent} from '../Header';
+import {HeaderComponent} from '../header';
 import icons from '../../shared/icons';
 
 const DefaultRoute = React.memo((props: any) => {
@@ -10,9 +9,10 @@ const DefaultRoute = React.memo((props: any) => {
       <HeaderComponent
         iconsLeft={[icons.arrow_left]}
         title="Чаты"
+        // inputText="Найти чат..."
         iconsRight={[icons.arrow_left]}
       />
-      <WText>Default Route</WText>
+      <WText>Первый экран в чатах</WText>
     </WView>
   );
 });
