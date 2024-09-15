@@ -3,13 +3,13 @@
 **Для запуска использовать:**
 
 ```bash
-`$ npm run android`
+npm run android
 # или
-`$ yarn run android`
+yarn run android
 # или
-`$ pnpm run android`
+pnpm run android
 # или
-`$ bun run android`
+bun run android
 ```
 
 **Используются технологии:**
