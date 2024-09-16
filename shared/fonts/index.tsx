@@ -12,9 +12,7 @@ interface IWTextProps extends TextProps {
 
 export const WText = React.memo((props: IWTextProps) => {
   const {variant, style, children, ...rest} = props;
-
   const textStyle = fontsStyles[variant];
-
   const color = getColorVariant(variant);
 
   return (
