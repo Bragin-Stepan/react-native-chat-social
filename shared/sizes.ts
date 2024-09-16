@@ -3,7 +3,7 @@ export const borderRadius = {
   md: 12,
 };
 
-export const padding = {
+export const spacing = {
   xxs: 4,
   xs: 6,
   sm: 8,

@@ -7,7 +7,7 @@ import {IWView} from './types';
 import useAppColor from './colors/useColor';
 import textStyles from './textStyles';
 import {borderRadius} from './sizes';
-import {padding} from './sizes';
+import {spacing} from './sizes';
 
 // ======== Text ========
 export const WText = React.memo((props: any) => {
@@ -47,7 +47,7 @@ export const WInput = React.memo((props: any) => {
     <View style={styles.inputContainer}>
       {/* Icons Left */}
       {props.iconsLeft && (
-        <View style={[{marginLeft: padding.md}, styles.iconsContainer]}>
+        <View style={[{marginLeft: spacing.md}, styles.iconsContainer]}>
           {props.iconsLeft.map((icon: any, index: number) => (
             <View key={index} style={styles.iconWrapper}>
               {icon}
@@ -60,14 +60,15 @@ export const WInput = React.memo((props: any) => {
       <TextInput
         {...props}
         style={[
+          props.style,
           {
             color: appColor.base_primary_dark,
             backgroundColor: appColor.base_secondary_normal,
             borderRadius: borderRadius.md,
-            paddingHorizontal: props.iconsLeft ? null : padding.lg,
+            paddingHorizontal: props.iconsLeft ? null : spacing.lg,
             flex: 1,
           },
-          props.style,
+
           textStyles.C1,
         ]}
         selectionColor={appColor.brand_primary_normal}
@@ -76,7 +77,7 @@ export const WInput = React.memo((props: any) => {
 
       {/* Icons Right */}
       {props.iconsRight && (
-        <View style={[{marginRight: padding.md}, styles.iconsContainer]}>
+        <View style={[{marginRight: spacing.md}, styles.iconsContainer]}>
           {props.iconsRight.map((icon: any, index: number) => (
             <View key={index} style={styles.iconWrapper}>
               {icon}
