@@ -1,5 +1,5 @@
 import {Image} from 'react-native';
-import iconSources from './iconSources';
+import iconSources from './icon-sources';
 
 const iconNavBarSize = 46;
 const iconSmallSize = 14;

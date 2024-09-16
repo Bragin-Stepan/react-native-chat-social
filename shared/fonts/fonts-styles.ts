@@ -1,6 +1,7 @@
-import fonts from './fonts';
+import fonts from './fonts-sources';
 
-const textStyles = {
+const fontsStyles = {
+  // Title
   T1: {
     fontFamily: fonts.bold,
     fontSize: 23,
@@ -17,12 +18,14 @@ const textStyles = {
     letterSpacing: 0.38,
   },
 
+  // Subtitle
   S1: {
     fontFamily: fonts.medium,
     fontSize: 23,
     letterSpacing: 0.38,
   },
 
+  // Paragraph
   P1: {
     fontFamily: fonts.regular,
     fontSize: 17,
@@ -39,6 +42,7 @@ const textStyles = {
     letterSpacing: 0.1,
   },
 
+  // Caption
   C1: {
     fontFamily: fonts.regular,
     fontSize: 15,
@@ -50,12 +54,14 @@ const textStyles = {
     letterSpacing: 0.03,
   },
 
+  // Lable
   L1: {
     fontFamily: fonts.medium,
     fontSize: 14,
     letterSpacing: 0.15,
   },
 
+  // Button
   B1: {
     fontFamily: fonts.bold,
     fontSize: 16,
@@ -73,4 +79,4 @@ const textStyles = {
   },
 };
 
-export default textStyles;
+export default fontsStyles;

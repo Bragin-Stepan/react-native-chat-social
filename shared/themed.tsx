@@ -1,24 +1,12 @@
 import React from 'react';
 import {Text, View, TextInput, StyleSheet} from 'react-native';
 
-import fonts from '../shared/fonts';
+import fonts from './fonts/fonts-sources';
 import {IWView} from './types';
-// import {IWText} from './types';
-import useAppColor from './colors/useColor';
-import textStyles from './textStyles';
+import useAppColor from './colors/use-color';
+import textStyles from './fonts/fonts-styles';
 import {borderRadius} from './sizes';
 import {spacing} from './sizes';
-
-// ======== Text ========
-export const WText = React.memo((props: any) => {
-  const appColor = useAppColor();
-
-  return (
-    <Text {...props} style={[{color: appColor.base_primary_dark}, props.style]}>
-      {props.children}
-    </Text>
-  );
-});
 
 // ======== View ========
 export const WView = React.memo((props: IWView) => {
