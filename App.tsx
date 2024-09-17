@@ -7,9 +7,9 @@ import {
   Text,
 } from 'react-native';
 import {BottomNavigation} from 'react-native-paper';
-import useAppColor from './shared/colors/useColor';
-import {ChatsComponent} from './components/tabs/Chats';
-import fonts from './shared/fonts';
+import useAppColor from './shared/colors/use-color';
+import {ChatsComponent} from './components/tabs/chats';
+import fonts from './shared/fonts/fonts-sources';
 import icons from './shared/icons';
 
 function App(): React.JSX.Element {

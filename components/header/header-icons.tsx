@@ -1,13 +1,18 @@
 import {View, StyleSheet} from 'react-native';
+import {spacing} from '../../shared/sizes';
+import {IPressedIcon} from '../../shared/types';
 
 export const HeaderIconsLeft = (props: any) => {
   return (
     <View style={styles.headerIconsRowContainer}>
-      {props.iconsLeft.map((icon: any, index: number) => (
+      {props.iconsLeft.map((icon: IPressedIcon, index: number) => (
         <View
           key={index}
-          style={[styles.headerIconContainer, {alignItems: 'center'}]}>
-          {icon}
+          style={[
+            styles.headerIconContainer,
+            // {alignItems: 'center'}
+          ]}>
+          {icon.icon}
         </View>
       ))}
     </View>
@@ -17,11 +22,14 @@ export const HeaderIconsLeft = (props: any) => {
 export const HeaderIconsRight = (props: any) => {
   return (
     <View style={styles.headerIconsRowContainer}>
-      {props.iconsRight.map((icon: any, index: number) => (
+      {props.iconsRight.map((icon: IPressedIcon, index: number) => (
         <View
           key={index}
-          style={[styles.headerIconContainer, {alignItems: 'center'}]}>
-          {icon}
+          style={[
+            styles.headerIconContainer,
+            index !== props.iconsRight.length - 1 && {marginRight: spacing.md},
+          ]}>
+          {icon.icon}
         </View>
       ))}
     </View>

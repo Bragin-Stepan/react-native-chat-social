@@ -3,15 +3,16 @@ import React from 'react';
 import {View, Image, StyleSheet} from 'react-native';
 import {WInput} from '../../shared/themed';
 import icons from '../../shared/icons';
-import {borderRadius} from '../../shared/sizes';
-import useAppColor from '../../shared/colors/useColor';
-import {padding} from '../../shared/sizes';
+import {borderRadius, spacing} from '../../shared/sizes';
+import useAppColor from '../../shared/colors/use-color';
+import {IPressedIcon} from '../../shared/types';
 
-interface SearchProps {
-  placeholder?: string;
-}
+const arrowLeftIcon: IPressedIcon = {
+  icon: icons.arrow_left,
+  onPress: () => null,
+};
 
-const HeaderSearch = React.memo((props: SearchProps) => {
+const HeaderSearch = React.memo((props: any) => {
   const appColor = useAppColor();
   return (
     <View
@@ -22,7 +23,7 @@ const HeaderSearch = React.memo((props: SearchProps) => {
       <WInput
         placeholder={props.placeholder}
         style={styles.input}
-        iconsLeft={[icons.search]}
+        iconsLeft={[arrowLeftIcon]}
       />
     </View>
   );
@@ -33,7 +34,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
-    marginHorizontal: padding.md,
+    marginHorizontal: spacing.md,
     borderRadius: borderRadius.md,
   },
   input: {

@@ -1,22 +1,16 @@
 import React from 'react';
 import {View, StyleSheet} from 'react-native';
-import {WText} from '../../shared/themed';
-import HeaderSearch from './HeaderSearch';
-import {HeaderIconsLeft, HeaderIconsRight} from './HeaderIcons';
 
-import textStyles from '../../shared/textStyles';
-import useAppColor from '../../shared/colors/useColor';
-import {padding} from '../../shared/sizes';
+import {WText} from '../../shared/fonts';
+import HeaderSearch from './header-search';
+import {HeaderIconsLeft, HeaderIconsRight} from './header-icons';
 
-interface HeaderComponentProps {
-  iconsLeft?: any;
-  title?: string;
-  placeholder?: string;
-  iconsRight?: any;
-}
+import useAppColor from '../../shared/colors/use-color';
+import {spacing} from '../../shared/sizes';
+import {THeaderProps} from '../../shared/types';
 
-const HeaderComponent = React.memo((props: HeaderComponentProps) => {
-  const appColor = useAppColor();
+const HeaderComponent = React.memo((props: THeaderProps) => {
+  // const appColor = useAppColor();
 
   return (
     <View style={styles.headerStyle}>
@@ -26,11 +20,8 @@ const HeaderComponent = React.memo((props: HeaderComponentProps) => {
       {/* ======== Title ======== */}
       {props.title && (
         <WText
-          style={[
-            textStyles.T1,
-            styles.headerTitle,
-            {color: appColor.base_primary_dark},
-          ]}
+          variant="T1"
+          style={styles.headerTitle}
           numberOfLines={1}
           ellipsizeMode="tail">
           {props.title}
@@ -41,6 +32,7 @@ const HeaderComponent = React.memo((props: HeaderComponentProps) => {
       {props.placeholder && <HeaderSearch placeholder={props.placeholder} />}
 
       {/* ======== Icons Right ======== */}
+      <View />
       {props.iconsRight && <HeaderIconsRight iconsRight={props.iconsRight} />}
     </View>
   );
@@ -52,13 +44,13 @@ const styles = StyleSheet.create({
     height: 80,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingHorizontal: padding.lg,
+    paddingHorizontal: spacing.lg,
     alignItems: 'center',
   },
   headerTitle: {
     flex: 1,
     overflow: 'hidden',
-    paddingStart: padding.md,
+    paddingStart: spacing.md,
   },
 });
 

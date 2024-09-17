@@ -2,7 +2,7 @@ import React from 'react';
 import {Text, View, TextInput, StyleSheet} from 'react-native';
 
 import fonts from './fonts/fonts-sources';
-import {IWView} from './types';
+import {IWInput, IWView} from './types';
 import useAppColor from './colors/use-color';
 import textStyles from './fonts/fonts-styles';
 import {borderRadius} from './sizes';
@@ -16,7 +16,7 @@ export const WView = React.memo((props: IWView) => {
     <View
       {...props}
       style={[
-        props.isParrent && {
+        props.isParent && {
           flex: 1,
           backgroundColor: appColor.base_secondary_light,
         },
@@ -28,7 +28,7 @@ export const WView = React.memo((props: IWView) => {
 });
 
 // ======== Input ========
-export const WInput = React.memo((props: any) => {
+export const WInput = React.memo((props: IWInput) => {
   const appColor = useAppColor();
 
   return (
