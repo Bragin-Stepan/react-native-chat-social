@@ -1,5 +1,4 @@
 import {TextProps, ViewProps, StyleProp, TextStyle} from 'react-native';
-import fonts from './fonts/fonts-sources';
 
 // Define a type for the main slice state
 export interface IMainSlice {
@@ -13,26 +12,22 @@ export interface IWView extends ViewProps {
 
 // Input
 export interface IWInput {
-  iconsLeft?: IPressedIcon[];
-  iconsRight?: IPressedIcon[];
+  iconsLeft?: TBaseIcon[];
+  iconsRight?: TBaseIcon[];
   placeholder?: string;
   style?: StyleProp<TextStyle>;
 }
 
 // Header
-export type THeaderProps = {
-  iconsLeft?: IPressedIcon[];
-  iconsRight?: IPressedIcon[];
+export interface IHeaderProps {
+  iconsLeft?: TBaseIcon[];
+  iconsRight?: TBaseIcon[];
   title?: string;
   placeholder?: string;
-};
+}
 
 // Base Icon
-export interface IBaseIcon {
+export type TBaseIcon = {
   icon: JSX.Element;
-}
-
-// Pressed Icon
-export interface IPressedIcon extends IBaseIcon {
-  onPress?: Function;
-}
+  onPress?: () => void;
+};

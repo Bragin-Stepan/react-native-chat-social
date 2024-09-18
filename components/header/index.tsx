@@ -5,13 +5,10 @@ import {WText} from '../../shared/fonts';
 import HeaderSearch from './header-search';
 import {HeaderIconsLeft, HeaderIconsRight} from './header-icons';
 
-import useAppColor from '../../shared/colors/use-color';
 import {spacing} from '../../shared/sizes';
-import {THeaderProps} from '../../shared/types';
+import {IHeaderProps} from '../../shared/types';
 
-const HeaderComponent = React.memo((props: THeaderProps) => {
-  // const appColor = useAppColor();
-
+const HeaderComponent = React.memo((props: IHeaderProps) => {
   return (
     <View style={styles.headerStyle}>
       {/* ======== Icons Left ======== */}

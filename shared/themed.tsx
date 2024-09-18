@@ -2,7 +2,7 @@ import React from 'react';
 import {Text, View, TextInput, StyleSheet} from 'react-native';
 
 import fonts from './fonts/fonts-sources';
-import {IWInput, IWView} from './types';
+import {IWInput, IWView, TBaseIcon} from './types';
 import useAppColor from './colors/use-color';
 import textStyles from './fonts/fonts-styles';
 import {borderRadius} from './sizes';
@@ -36,9 +36,12 @@ export const WInput = React.memo((props: IWInput) => {
       {/* Icons Left */}
       {props.iconsLeft && (
         <View style={[{marginLeft: spacing.md}, styles.iconsContainer]}>
-          {props.iconsLeft.map((icon: any, index: number) => (
-            <View key={index} style={styles.iconWrapper}>
-              {icon}
+          {props.iconsLeft.map((icon: TBaseIcon, index: number) => (
+            <View
+              key={index}
+              onTouchEnd={() => icon.onPress?.()}
+              style={styles.iconWrapper}>
+              {icon.icon}
             </View>
           ))}
         </View>
@@ -66,9 +69,12 @@ export const WInput = React.memo((props: IWInput) => {
       {/* Icons Right */}
       {props.iconsRight && (
         <View style={[{marginRight: spacing.md}, styles.iconsContainer]}>
-          {props.iconsRight.map((icon: any, index: number) => (
-            <View key={index} style={styles.iconWrapper}>
-              {icon}
+          {props.iconsRight.map((icon: TBaseIcon, index: number) => (
+            <View
+              key={index}
+              onTouchEnd={() => icon.onPress?.()}
+              style={styles.iconWrapper}>
+              {icon.icon}
             </View>
           ))}
         </View>

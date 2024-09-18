@@ -5,11 +5,10 @@ import {WInput} from '../../shared/themed';
 import icons from '../../shared/icons';
 import {borderRadius, spacing} from '../../shared/sizes';
 import useAppColor from '../../shared/colors/use-color';
-import {IPressedIcon} from '../../shared/types';
+import {TBaseIcon} from '../../shared/types';
 
-const arrowLeftIcon: IPressedIcon = {
-  icon: icons.arrow_left,
-  onPress: () => null,
+const searchIcon: TBaseIcon = {
+  icon: icons.search,
 };
 
 const HeaderSearch = React.memo((props: any) => {
@@ -23,7 +22,7 @@ const HeaderSearch = React.memo((props: any) => {
       <WInput
         placeholder={props.placeholder}
         style={styles.input}
-        iconsLeft={[arrowLeftIcon]}
+        iconsLeft={[searchIcon]}
       />
     </View>
   );
