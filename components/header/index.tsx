@@ -1,18 +1,16 @@
 import React from 'react';
 import {View, StyleSheet} from 'react-native';
 
-import {WText} from '../../shared/fonts';
-import HeaderSearch from './header-search';
-import {HeaderIconsLeft, HeaderIconsRight} from './header-icons';
-
+import {IconsRow, WText} from '../../shared/themed';
 import {spacing} from '../../shared/sizes';
 import {IHeaderProps} from '../../shared/types';
+import HeaderSearch from './header-search';
 
 const HeaderComponent = React.memo((props: IHeaderProps) => {
   return (
     <View style={styles.headerStyle}>
       {/* ======== Icons Left ======== */}
-      {props.iconsLeft && <HeaderIconsLeft iconsLeft={props.iconsLeft} />}
+      {props.iconsLeft && <IconsRow icons={props.iconsLeft} />}
 
       {/* ======== Title ======== */}
       {props.title && (
@@ -24,13 +22,12 @@ const HeaderComponent = React.memo((props: IHeaderProps) => {
           {props.title}
         </WText>
       )}
-
       {/* ======== Search ======== */}
       {props.placeholder && <HeaderSearch placeholder={props.placeholder} />}
 
       {/* ======== Icons Right ======== */}
       <View />
-      {props.iconsRight && <HeaderIconsRight iconsRight={props.iconsRight} />}
+      {props.iconsRight && <IconsRow icons={props.iconsRight} />}
     </View>
   );
 });

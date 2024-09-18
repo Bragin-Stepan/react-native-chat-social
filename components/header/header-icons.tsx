@@ -26,7 +26,7 @@ export const HeaderIconsRight = (props: any) => {
           onTouchEnd={() => icon.onPress?.()}
           style={[
             styles.headerIconContainer,
-            index !== props.iconsRight.length - 1 && {marginRight: spacing.md},
+            // index !== props.iconsRight.length - 1 && {marginRight: spacing.md},
           ]}>
           {icon.icon}
         </View>

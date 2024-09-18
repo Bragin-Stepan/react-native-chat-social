@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {View, Image, StyleSheet} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 import {WInput} from '../../shared/themed';
 import icons from '../../shared/icons';
 import {borderRadius, spacing} from '../../shared/sizes';
