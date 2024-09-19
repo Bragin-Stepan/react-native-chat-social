@@ -1,5 +1,5 @@
 import useAppColor from '../colors/use-color';
-import fontsStyles from './fonts-styles';
+import fontStyles from './font-styles';
 
 const primaryDarkVariants = [
   'T1',
@@ -15,7 +15,7 @@ const primaryDarkVariants = [
 const primarylightVariants = ['C1', 'B3'];
 const secondaryLightVariants = ['B1', 'B2'];
 
-export const getColorVariant = (variant: keyof typeof fontsStyles) => {
+export const getColorVariant = (variant: keyof typeof fontStyles) => {
   const appColor = useAppColor();
 
   if (primaryDarkVariants.includes(variant)) {

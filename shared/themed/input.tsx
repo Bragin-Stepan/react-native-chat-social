@@ -3,9 +3,9 @@ import {View, TextInput, StyleSheet} from 'react-native';
 
 import {IWInput} from '../types';
 import useAppColor from '../colors/use-color';
-import textStyles from '../fonts/fonts-styles';
+import fontStyles from '../fonts/font-styles';
 import {borderRadius, spacing} from '../sizes';
-import {IconsRow} from './icons-row';
+import {IconsRow} from './';
 
 // ======== Input ========
 export const WInput = React.memo((props: IWInput) => {
@@ -27,7 +27,7 @@ export const WInput = React.memo((props: IWInput) => {
             paddingHorizontal: props.iconsLeft ? null : spacing.lg,
             flex: 1,
           },
-          textStyles.C1,
+          fontStyles.C1,
         ]}
         selectionColor={appColor.brand_primary_normal}
         placeholderTextColor={appColor.base_secondary_dark}

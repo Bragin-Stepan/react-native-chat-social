@@ -1,7 +1,7 @@
 import React from 'react';
 import {Text, TextProps} from 'react-native';
 
-import fontsStyles from './fonts-styles';
+import fontsStyles from './font-styles';
 import useAppColor from '../colors/use-color';
 import {getColorVariant} from './get-color-variant';
 

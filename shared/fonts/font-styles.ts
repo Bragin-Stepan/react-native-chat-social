@@ -1,6 +1,6 @@
 import fonts from './fonts-sources';
 
-const fontsStyles = {
+const fontStyles = {
   // Title
   T1: {
     fontFamily: fonts.bold,
@@ -79,4 +79,4 @@ const fontsStyles = {
   },
 };
 
-export default fontsStyles;
+export default fontStyles;
