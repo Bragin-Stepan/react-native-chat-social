@@ -5,6 +5,7 @@ import {HeaderComponent} from '../header';
 
 import icons from '../../shared/icons';
 import {TBaseIcon} from '../../shared/types';
+import {spacing} from '../../shared/sizes';
 
 const DefaultRoute = React.memo((props: any) => {
   const [isSearching, setIsSearching] = React.useState(true);
@@ -35,7 +36,9 @@ const DefaultRoute = React.memo((props: any) => {
           ? {title: 'Чаты', iconsRight: [searchIcon, settingsIcon]}
           : {iconsLeft: [closeSearchIcon], placeholder: 'Найти чат...'})}
       />
-      <WText variant="T2">Первый экран в чатах</WText>
+      <WView style={{paddingHorizontal: spacing.lg}}>
+        <WText variant="T2">Первый экран в чатах</WText>
+      </WView>
     </WView>
   );
 });

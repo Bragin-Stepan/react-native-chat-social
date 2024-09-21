@@ -16,7 +16,10 @@ const HeaderComponent = React.memo((props: IHeaderProps) => {
       {props.title && (
         <WText
           variant="T1"
-          style={styles.headerTitle}
+          style={[
+            styles.headerTitle,
+            props.iconsLeft && {paddingStart: spacing.md},
+          ]}
           numberOfLines={1}
           ellipsizeMode="tail">
           {props.title}
@@ -35,16 +38,16 @@ const HeaderComponent = React.memo((props: IHeaderProps) => {
 // ======== Стили ========
 const styles = StyleSheet.create({
   headerStyle: {
+    paddingHorizontal: spacing.lg,
     height: 80,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingHorizontal: spacing.lg,
     alignItems: 'center',
   },
   headerTitle: {
     flex: 1,
     overflow: 'hidden',
-    paddingStart: spacing.md,
+    // paddingStart: spacing.md,
   },
 });
 

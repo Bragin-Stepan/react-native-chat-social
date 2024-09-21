@@ -8,17 +8,15 @@ import {
 } from 'react-native';
 import {BottomNavigation} from 'react-native-paper';
 import useAppColor from './shared/colors/use-color';
-import {ChatsComponent} from './components/tabs/chats';
 import icons from './shared/icons';
+import {ChatsComponent} from './components/tabs/chats';
+import {FeedComponent} from './components/tabs/feed';
+import {SearchComponent} from './components/tabs/search';
+import {ProfileComponent} from './components/tabs/profile';
 
 function App(): React.JSX.Element {
   const isDarkMode = useColorScheme() === 'dark';
   const appColor = useAppColor();
-
-  // Экраны
-  const FeedRoute = () => <Text>Главная</Text>;
-  const SearchRoute = () => <Text>Поиск</Text>;
-  const ProfileRoute = () => <Text>Профиль</Text>;
 
   // Навбар
   const [index, setIndex] = React.useState(0);
@@ -50,10 +48,10 @@ function App(): React.JSX.Element {
   ]);
 
   const renderScene = BottomNavigation.SceneMap({
-    feed: FeedRoute,
-    search: SearchRoute,
+    feed: FeedComponent,
+    search: SearchComponent,
     chat: ChatsComponent,
-    profile: ProfileRoute,
+    profile: ProfileComponent,
   });
 
   return (
@@ -68,6 +66,7 @@ function App(): React.JSX.Element {
         backgroundColor={appColor.base_secondary_light}
       />
       <BottomNavigation
+        key={index}
         navigationState={{index, routes}}
         onIndexChange={setIndex}
         renderScene={renderScene}
