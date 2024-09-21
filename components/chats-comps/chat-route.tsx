@@ -4,19 +4,18 @@ import {HeaderComponent} from '../header';
 import useAppColor from '../../shared/colors/use-color';
 import {arrowLeftIcon} from '../button';
 
-const ChatRoute = React.memo((props: any) => {
-  const appColor = useAppColor();
+const SettingsChatRoute = React.memo((props: any) => {
   return (
     <WView isParent>
       <HeaderComponent
         iconsLeft={[arrowLeftIcon]}
-        title="Чаты"
+        title="Настройки чата"
         // placeholder="Найти чат..."
         // iconsRight={[arrowLeftIcon]}
       />
-      <WText variant="T2">Первый экран в чатах</WText>
+      <WText variant="T2">Экран настроек чата</WText>
     </WView>
   );
 });
 
-export {ChatRoute};
+export {SettingsChatRoute};

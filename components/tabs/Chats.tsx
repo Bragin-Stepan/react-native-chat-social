@@ -3,7 +3,7 @@ import {View, Text} from 'react-native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {WView} from '../../shared/themed';
 import DefaultRoute from '../chats-comps/default-route';
-import {ChatRoute} from '../chats-comps/chat-route';
+import {SettingsChatRoute} from '../chats-comps/chat-route';
 
 const Stack = createNativeStackNavigator();
 
@@ -17,7 +17,7 @@ const ChatsComponent = React.memo((props: any) => {
     <WView style={{flex: 1}}>
       <Stack.Navigator screenOptions={{headerShown: false}}>
         <Stack.Screen name="chatDefault" component={DefaultRoute} />
-        <Stack.Screen name="chatPage" component={ChatRoute} />
+        <Stack.Screen name="chatSettingsPage" component={SettingsChatRoute} />
       </Stack.Navigator>
     </WView>
   );

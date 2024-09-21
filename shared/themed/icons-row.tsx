@@ -1,10 +1,11 @@
 import React from 'react';
-import {View, StyleSheet, ViewStyle} from 'react-native';
+import {View, StyleSheet, ViewStyle, StyleProp} from 'react-native';
 import {TBaseIcon} from '../types';
 
 interface IconsRowProps {
   icons?: TBaseIcon[];
-  style?: ViewStyle;
+  style?: StyleProp<ViewStyle>;
+  index?: number;
 }
 
 export const IconsRow = React.memo(({icons, style}: IconsRowProps) => {
@@ -12,11 +13,11 @@ export const IconsRow = React.memo(({icons, style}: IconsRowProps) => {
 
   return (
     <View style={[styles.iconsContainer, style]}>
-      {icons.map((icon, index) => (
+      {icons.map((icon, index, ...props) => (
         <View
           key={index}
           onTouchEnd={() => icon.onPress?.()}
-          style={styles.iconWrapper}>
+          style={[styles.iconWrapper]}>
           {icon.icon}
         </View>
       ))}

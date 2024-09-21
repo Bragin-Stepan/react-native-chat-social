@@ -1,7 +1,7 @@
 import {Image} from 'react-native';
 import iconSources from './icon-sources';
 
-const iconNavBarSize = 46;
+const iconLargeSize = 46;
 const iconSmallSize = 14;
 
 export default {
@@ -9,49 +9,57 @@ export default {
   chat_outline: (
     <Image
       source={iconSources.ChatOutline}
-      style={{width: iconNavBarSize, height: iconNavBarSize}}
+      style={{width: iconLargeSize, height: iconLargeSize}}
     />
   ),
   chat_fill: (
     <Image
       source={iconSources.ChatFill}
-      style={{width: iconNavBarSize, height: iconNavBarSize}}
+      style={{width: iconLargeSize, height: iconLargeSize}}
     />
   ),
   profile_outline: (
     <Image
       source={iconSources.ProfileOutline}
-      style={{width: iconNavBarSize, height: iconNavBarSize}}
+      style={{width: iconLargeSize, height: iconLargeSize}}
     />
   ),
   profile_fill: (
     <Image
       source={iconSources.ProfileFill}
-      style={{width: iconNavBarSize, height: iconNavBarSize}}
+      style={{width: iconLargeSize, height: iconLargeSize}}
     />
   ),
   home_outline: (
     <Image
       source={iconSources.HomeOutline}
-      style={{width: iconNavBarSize, height: iconNavBarSize}}
+      style={{width: iconLargeSize, height: iconLargeSize}}
     />
   ),
   home_fill: (
     <Image
       source={iconSources.HomeFill}
-      style={{width: iconNavBarSize, height: iconNavBarSize}}
+      style={{width: iconLargeSize, height: iconLargeSize}}
     />
   ),
   search_outline: (
     <Image
       source={iconSources.SearchOutline}
-      style={{width: iconNavBarSize, height: iconNavBarSize}}
+      style={{width: iconLargeSize, height: iconLargeSize}}
     />
   ),
   search_fill: (
     <Image
       source={iconSources.SearchFill}
-      style={{width: iconNavBarSize, height: iconNavBarSize}}
+      style={{width: iconLargeSize, height: iconLargeSize}}
+    />
+  ),
+
+  // ======= Large =======
+  settings: (
+    <Image
+      source={iconSources.Settings}
+      style={{width: iconLargeSize, height: iconLargeSize}}
     />
   ),
 

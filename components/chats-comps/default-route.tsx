@@ -7,7 +7,12 @@ import icons from '../../shared/icons';
 import {TBaseIcon} from '../../shared/types';
 
 const DefaultRoute = React.memo((props: any) => {
-  const [isSearching, setIsSearching] = React.useState(false);
+  const [isSearching, setIsSearching] = React.useState(true);
+
+  const settingsIcon: TBaseIcon = {
+    icon: icons.settings,
+    onPress: () => props.navigation.navigate('chatSettingsPage'),
+  };
 
   const closeSearchIcon: TBaseIcon = {
     icon: icons.arrow_left,
@@ -26,8 +31,8 @@ const DefaultRoute = React.memo((props: any) => {
   return (
     <WView isParent>
       <HeaderComponent
-        {...(!isSearching
-          ? {title: 'Чаты', iconsRight: [searchIcon]}
+        {...(isSearching
+          ? {title: 'Чаты', iconsRight: [searchIcon, settingsIcon]}
           : {iconsLeft: [closeSearchIcon], placeholder: 'Найти чат...'})}
       />
       <WText variant="T2">Первый экран в чатах</WText>

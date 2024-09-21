@@ -1,19 +1,19 @@
 import React from 'react';
 import {Text, TextProps} from 'react-native';
 
-import fontsStyles from './font-styles';
+import fontStyle from './font-style';
 import useAppColor from '../colors/use-color';
 import {getColorVariant} from './get-color-variant';
 
 interface IWTextProps extends TextProps {
-  variant: keyof typeof fontsStyles;
+  variant: keyof typeof fontStyle;
   customColor?: keyof ReturnType<typeof useAppColor>;
   children: string;
 }
 
 export const WText = React.memo((props: IWTextProps) => {
   const {variant, style, children, customColor, ...rest} = props;
-  const textStyle = fontsStyles[variant];
+  const textStyle = fontStyle[variant];
   const appColor = useAppColor();
 
   const color = customColor ? appColor[customColor] : getColorVariant(variant);

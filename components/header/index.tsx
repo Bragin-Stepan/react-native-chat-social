@@ -22,6 +22,7 @@ const HeaderComponent = React.memo((props: IHeaderProps) => {
           {props.title}
         </WText>
       )}
+
       {/* ======== Search ======== */}
       {props.placeholder && <HeaderSearch placeholder={props.placeholder} />}
 

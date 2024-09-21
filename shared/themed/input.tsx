@@ -3,7 +3,7 @@ import {View, TextInput, StyleSheet} from 'react-native';
 
 import {IWInput} from '../types';
 import useAppColor from '../colors/use-color';
-import fontStyles from '../fonts/font-styles';
+import fontStyle from '../fonts/font-style';
 import {borderRadius, spacing} from '../sizes';
 import {IconsRow} from './';
 
@@ -14,7 +14,9 @@ export const WInput = React.memo((props: IWInput) => {
   return (
     <View style={styles.inputContainer}>
       {/* Icons Left */}
-      {props.iconsLeft && <IconsRow icons={props.iconsLeft} />}
+      {props.iconsLeft && (
+        <IconsRow icons={props.iconsLeft} style={{marginLeft: spacing.sm}} />
+      )}
       {/* Input Field */}
       <TextInput
         {...props}
@@ -24,10 +26,10 @@ export const WInput = React.memo((props: IWInput) => {
             color: appColor.base_primary_dark,
             backgroundColor: appColor.base_secondary_normal,
             borderRadius: borderRadius.md,
-            paddingHorizontal: props.iconsLeft ? null : spacing.lg,
+            paddingLeft: props.iconsLeft ? null : spacing.lg,
             flex: 1,
           },
-          fontStyles.C1,
+          fontStyle.C1,
         ]}
         selectionColor={appColor.brand_primary_normal}
         placeholderTextColor={appColor.base_secondary_dark}

@@ -20,6 +20,7 @@ export type TBaseIcon = {
 export interface IIconsRow {
   iconsLeft?: TBaseIcon[];
   iconsRight?: TBaseIcon[];
+  index?: number;
 }
 
 // Input
