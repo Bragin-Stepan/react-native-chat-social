@@ -33,4 +33,5 @@ export interface IWInput extends IIconsRow {
 export interface IHeaderProps extends IIconsRow {
   title?: string;
   placeholder?: string;
+  item?: any;
 }

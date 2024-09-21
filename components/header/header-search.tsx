@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
-    marginHorizontal: spacing.md,
+    paddingHorizontal: spacing.md,
     borderRadius: borderRadius.md,
   },
   input: {

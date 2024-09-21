@@ -1,14 +1,19 @@
 import React from 'react';
-import {TextInput, Animated} from 'react-native';
+import {ScrollView, View} from 'react-native';
 import {WText, WView} from '../../shared/themed';
 import {HeaderComponent} from '../header';
+import {ProfileItem} from '../shared/profile-item';
 
 import icons from '../../shared/icons';
 import {TBaseIcon} from '../../shared/types';
 import {spacing} from '../../shared/sizes';
 
 const DefaultRoute = React.memo((props: any) => {
-  const [isSearching, setIsSearching] = React.useState(true);
+  const onChatPress = () => {
+    props.navigation.navigate('chatPage');
+  };
+
+  const [isSearching, setIsSearching] = React.useState(false);
 
   const settingsIcon: TBaseIcon = {
     icon: icons.settings,
@@ -33,12 +38,97 @@ const DefaultRoute = React.memo((props: any) => {
     <WView isParent>
       <HeaderComponent
         {...(isSearching
-          ? {title: 'Чаты', iconsRight: [searchIcon, settingsIcon]}
-          : {iconsLeft: [closeSearchIcon], placeholder: 'Найти чат...'})}
+          ? {iconsLeft: [closeSearchIcon], placeholder: 'Найти чат...'}
+          : {title: 'Чаты', iconsRight: [searchIcon, settingsIcon]})}
       />
-      <WView style={{paddingHorizontal: spacing.lg}}>
-        <WText variant="T2">Первый экран в чатах</WText>
-      </WView>
+      <ScrollView>
+        <View style={{paddingHorizontal: spacing.lg}}>
+          <ProfileItem
+            onPress={() => onChatPress()}
+            nickname="Nickname"
+            avatar="https://i.pravatar.cc/296"
+            subTitle="Последнее сообщение"
+            titleRight="1 час назад"
+            countMessage={3}
+          />
+          <ProfileItem
+            nickname="Nickname"
+            avatar="https://i.pravatar.cc/296"
+            subTitle="Последнее сообщение"
+            titleRight="16:23"
+            countMessage={123}
+          />
+          <ProfileItem
+            nickname="Nickname"
+            avatar="https://i.pravatar.cc/296"
+            subTitle="Последнее сообщение"
+            titleRight="2 часа назад"
+          />
+          <ProfileItem
+            nickname="Nickname"
+            avatar="https://i.pravatar.cc/296"
+            subTitle="Последнее сообщение"
+            titleRight="16:23"
+            countMessage={2}
+          />
+          <ProfileItem
+            nickname="Nickname"
+            avatar="https://i.pravatar.cc/296"
+            subTitle="Последнее сообщение"
+            titleRight="16:23"
+            countMessage={2}
+          />
+          <ProfileItem
+            nickname="Nickname"
+            avatar="https://i.pravatar.cc/296"
+            subTitle="Последнее сообщение"
+            titleRight="16:23"
+            countMessage={2}
+          />
+          <ProfileItem
+            nickname="Nickname"
+            avatar="https://i.pravatar.cc/296"
+            subTitle="Последнее сообщение"
+            titleRight="16:23"
+            countMessage={2}
+          />
+          <ProfileItem
+            nickname="Nickname"
+            avatar="https://i.pravatar.cc/296"
+            subTitle="Последнее сообщение"
+            titleRight="16:23"
+            countMessage={2}
+          />
+          <ProfileItem
+            nickname="Nickname"
+            avatar="https://i.pravatar.cc/296"
+            subTitle="Последнее сообщение"
+            titleRight="16:23"
+            countMessage={2}
+          />
+          <ProfileItem
+            nickname="Nickname"
+            avatar="https://i.pravatar.cc/296"
+            subTitle="Последнее сообщение"
+            titleRight="16:23"
+            countMessage={2}
+          />
+          <ProfileItem
+            nickname="Nickname"
+            avatar="https://i.pravatar.cc/296"
+            subTitle="Последнее сообщение"
+            titleRight="16:23"
+            countMessage={2}
+          />
+          <ProfileItem
+            nickname="Nickname"
+            avatar="https://i.pravatar.cc/296"
+            subTitle="Последнее сообщение"
+            titleRight="16:23"
+            countMessage={2}
+          />
+        </View>
+      </ScrollView>
     </WView>
   );
 });

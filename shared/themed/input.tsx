@@ -30,7 +30,7 @@ export const WInput = React.memo((props: IWInput) => {
             color: appColor.base_primary_dark,
             backgroundColor: appColor.base_secondary_normal,
             borderRadius: borderRadius.md,
-            paddingLeft: props.iconsLeft ? null : spacing.lg,
+            paddingLeft: props.iconsLeft ? -spacing.lg : spacing.lg,
             flex: 1,
           },
           fontStyle.C1,

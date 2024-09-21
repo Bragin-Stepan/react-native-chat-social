@@ -17,11 +17,13 @@ export const IconsRow = React.memo(
     const getIconSpacing = (index: number) => {
       if (index !== icons.length - 1) {
         return side === 'Left'
-          ? {marginLeft: spacing.sm}
-          : {marginRight: spacing.sm};
+          ? {marginLeft: spacing.md}
+          : {marginRight: spacing.md};
       }
       return null;
     };
+
+    // const iconAllignment = side === 'Left' ? 'flex-start' : 'flex-end';
 
     return (
       <View style={[styles.iconsContainer, style]}>
@@ -29,7 +31,12 @@ export const IconsRow = React.memo(
           <View
             key={index}
             onTouchEnd={() => icon.onPress?.()}
-            style={[styles.iconWrapper, styleIcon, getIconSpacing(index)]}>
+            style={[
+              styles.iconWrapper,
+              styleIcon,
+              getIconSpacing(index),
+              // {alignItems: iconAllignment},
+            ]}>
             {icon.icon}
           </View>
         ))}
@@ -45,9 +52,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   iconWrapper: {
-    height: 40,
-    width: 40,
+    // backgroundColor: 'red',
+    height: 36,
+    width: 36,
+    paddingHorizontal: spacing.xxs,
     justifyContent: 'center',
-    alignItems: 'center',
+    // alignItems: 'flex-start',
   },
 });

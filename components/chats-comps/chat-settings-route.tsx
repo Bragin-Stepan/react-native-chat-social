@@ -3,8 +3,9 @@ import {WText, WView} from '../../shared/themed';
 import {HeaderComponent} from '../header';
 import useAppColor from '../../shared/colors/use-color';
 import {arrowLeftIcon} from '../button';
+import {spacing} from '../../shared/sizes';
 
-const SettingsChatRoute = React.memo((props: any) => {
+const ChatSettingsRoute = React.memo((props: any) => {
   return (
     <WView isParent>
       <HeaderComponent
@@ -13,9 +14,11 @@ const SettingsChatRoute = React.memo((props: any) => {
         // placeholder="Найти чат..."
         // iconsRight={[arrowLeftIcon, arrowLeftIcon]}
       />
-      <WText variant="T2">Экран настроек чата</WText>
+      <WText variant="T2" style={{paddingHorizontal: spacing.lg}}>
+        Экран настроек чата
+      </WText>
     </WView>
   );
 });
 
-export {SettingsChatRoute};
+export {ChatSettingsRoute};

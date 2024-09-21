@@ -20,6 +20,8 @@ import ArrowLeft from '../../assets/icons/system/arrow_left.png';
 import Search from '../../assets/icons/system/search.png';
 // @ts-ignore
 import Settings from '../../assets/icons/system/settings.png';
+// @ts-ignore
+import Dots from '../../assets/icons/system/dots.png';
 
 export default {
   ChatOutline,
@@ -33,4 +35,5 @@ export default {
   ArrowLeft,
   Search,
   Settings,
+  Dots,
 };

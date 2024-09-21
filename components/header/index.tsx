@@ -5,6 +5,7 @@ import {IconsRow, WText} from '../../shared/themed';
 import {spacing} from '../../shared/sizes';
 import {IHeaderProps} from '../../shared/types';
 import HeaderSearch from './header-search';
+import {ProfileItem} from '../shared/profile-item';
 
 const HeaderComponent = React.memo((props: IHeaderProps) => {
   return (
@@ -18,13 +19,16 @@ const HeaderComponent = React.memo((props: IHeaderProps) => {
           variant="T1"
           style={[
             styles.headerTitle,
-            props.iconsLeft && {paddingStart: spacing.md},
+            // props.iconsLeft && {paddingStart: spacing.md},
           ]}
           numberOfLines={1}
           ellipsizeMode="tail">
           {props.title}
         </WText>
       )}
+
+      {/* ======== Item ======== */}
+      {props.item}
 
       {/* ======== Search ======== */}
       {props.placeholder && <HeaderSearch placeholder={props.placeholder} />}
@@ -39,7 +43,8 @@ const HeaderComponent = React.memo((props: IHeaderProps) => {
 const styles = StyleSheet.create({
   headerStyle: {
     paddingHorizontal: spacing.lg,
-    height: 80,
+    height: 60,
+    // maxWidth: '100%',
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -47,7 +52,6 @@ const styles = StyleSheet.create({
   headerTitle: {
     flex: 1,
     overflow: 'hidden',
-    // paddingStart: spacing.md,
   },
 });
 

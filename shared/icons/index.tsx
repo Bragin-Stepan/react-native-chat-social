@@ -62,6 +62,12 @@ export default {
       style={{width: iconLargeSize, height: iconLargeSize}}
     />
   ),
+  dots: (
+    <Image
+      source={iconSources.Dots}
+      style={{width: iconLargeSize, height: iconLargeSize}}
+    />
+  ),
 
   // ======= Small =======
   arrow_left: (
