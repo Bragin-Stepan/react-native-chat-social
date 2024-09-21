@@ -35,3 +35,18 @@ export interface IHeaderProps extends IIconsRow {
   placeholder?: string;
   item?: any;
 }
+
+// Profile Item
+export interface IProfileItemProps {
+  id: number;
+  nickname: string;
+  subTitle: string;
+  avatar: string;
+  lastMessage?: string;
+  lastMessageTime?: string;
+  whenWasOnline?: string;
+  isOnline?: boolean;
+  titleRight?: string;
+  countMessage?: number;
+  onPress?: () => void;
+}

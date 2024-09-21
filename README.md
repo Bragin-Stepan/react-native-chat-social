@@ -19,3 +19,4 @@ bun run android
 - React Native Paper
 - ReactNavigation
 - ReactNavigation Native Stack
+- Moment.js

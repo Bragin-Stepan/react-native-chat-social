@@ -1,6 +1,4 @@
-import {IconsRow} from './icons-row';
-import {WView} from './view';
-import {WInput} from './input';
-import {WText} from '../fonts';
-
-export {IconsRow, WView, WInput, WText};
+export {IconsRow} from './icons-row';
+export {WView} from './view';
+export {WInput} from './input';
+export {WText} from '../fonts';

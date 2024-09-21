@@ -3,23 +3,22 @@ import {StyleSheet, View, Image, TouchableOpacity} from 'react-native';
 import {WText} from '../../shared/fonts';
 import {spacing} from '../../shared/sizes';
 import useAppColor from '../../shared/colors/use-color';
-
-interface IProfileItemProps {
-  nickname: string;
-  subTitle: string;
-  avatar: string;
-  titleRight?: string;
-  countMessage?: number;
-  onPress?: () => void;
-}
+import {IProfileItemProps} from '../../shared/types';
 
 export const ProfileItem = React.memo((props: IProfileItemProps) => {
   const appColor = useAppColor();
 
-  const formatCountMessage =
-    props.countMessage && props.countMessage > 99
-      ? '99+'
-      : String(props.countMessage);
+  const [isOnline, setIsOnline] = React.useState(props.isOnline);
+
+  const formatCountMessage = (count: number) => {
+    if (count > 99) {
+      return '99+';
+    } else if (count === 0) {
+      return '0';
+    } else {
+      return count.toString();
+    }
+  };
 
   return (
     <TouchableOpacity style={styles.itemContainer} onPress={props.onPress}>
@@ -29,7 +28,15 @@ export const ProfileItem = React.memo((props: IProfileItemProps) => {
             justifyContent: 'center',
           }}>
           <Image
-            style={{height: 50, width: 50, borderRadius: 30}}
+            style={{
+              height: 50,
+              width: 50,
+              borderRadius: 30,
+              borderWidth: 3,
+              borderColor: isOnline
+                ? appColor.system_success_normal
+                : appColor.base_secondary_dark,
+            }}
             source={{uri: props.avatar}}
           />
         </View>
@@ -82,14 +89,14 @@ export const ProfileItem = React.memo((props: IProfileItemProps) => {
             justifyContent: 'center',
             backgroundColor: appColor.brand_primary_normal,
           }}>
-          {props.countMessage && (
+          {props.countMessage && props.countMessage >= 0 ? (
             <WText
               variant="C2"
               customColor="base_secondary_light"
               style={{margin: 1}}>
-              {formatCountMessage}
+              {formatCountMessage(props.countMessage)}
             </WText>
-          )}
+          ) : null}
         </View>
       </View>
     </TouchableOpacity>

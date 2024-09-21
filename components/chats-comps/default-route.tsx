@@ -3,17 +3,17 @@ import {ScrollView, View} from 'react-native';
 import {WText, WView} from '../../shared/themed';
 import {HeaderComponent} from '../header';
 import {ProfileItem} from '../shared/profile-item';
-
 import icons from '../../shared/icons';
-import {TBaseIcon} from '../../shared/types';
+import {IProfileItemProps, TBaseIcon} from '../../shared/types';
 import {spacing} from '../../shared/sizes';
+import {getUsersInformation} from '../../shared/api/get-users-information';
+import {formatLastMessageTime} from '../../utils/time-format';
+import {formatLastOnlineTime} from '../../utils/online-format';
 
 const DefaultRoute = React.memo((props: any) => {
-  const onChatPress = () => {
-    props.navigation.navigate('chatPage');
-  };
-
   const [isSearching, setIsSearching] = React.useState(false);
+  const [users, setUsers] = React.useState([]);
+  const [loading, setLoading] = React.useState(true);
 
   const settingsIcon: TBaseIcon = {
     icon: icons.settings,
@@ -34,6 +34,35 @@ const DefaultRoute = React.memo((props: any) => {
     },
   };
 
+  const onChatPress = () => {
+    props.navigation.navigate('chatPage');
+  };
+
+  // Вызов данных
+  React.useEffect(() => {
+    const fetchUsers = async () => {
+      const userData = await getUsersInformation();
+      userData.sort((a: any, b: any) => {
+        return (
+          new Date(b.lastMessageTime).getTime() -
+          new Date(a.lastMessageTime).getTime()
+        );
+      });
+      setUsers(userData);
+      setLoading(false);
+    };
+
+    fetchUsers();
+  }, []);
+
+  if (loading) {
+    return (
+      <WView isParent>
+        <WText>{'Загрузка...'}</WText>
+      </WView>
+    );
+  }
+
   return (
     <WView isParent>
       <HeaderComponent
@@ -41,92 +70,25 @@ const DefaultRoute = React.memo((props: any) => {
           ? {iconsLeft: [closeSearchIcon], placeholder: 'Найти чат...'}
           : {title: 'Чаты', iconsRight: [searchIcon, settingsIcon]})}
       />
+
+      {/* {formatLastMessageTime}
+
+      {formatLastOnlineTime} */}
       <ScrollView>
         <View style={{paddingHorizontal: spacing.lg}}>
-          <ProfileItem
-            onPress={() => onChatPress()}
-            nickname="Nickname"
-            avatar="https://i.pravatar.cc/296"
-            subTitle="Последнее сообщение"
-            titleRight="1 час назад"
-            countMessage={3}
-          />
-          <ProfileItem
-            nickname="Nickname"
-            avatar="https://i.pravatar.cc/296"
-            subTitle="Последнее сообщение"
-            titleRight="16:23"
-            countMessage={123}
-          />
-          <ProfileItem
-            nickname="Nickname"
-            avatar="https://i.pravatar.cc/296"
-            subTitle="Последнее сообщение"
-            titleRight="2 часа назад"
-          />
-          <ProfileItem
-            nickname="Nickname"
-            avatar="https://i.pravatar.cc/296"
-            subTitle="Последнее сообщение"
-            titleRight="16:23"
-            countMessage={2}
-          />
-          <ProfileItem
-            nickname="Nickname"
-            avatar="https://i.pravatar.cc/296"
-            subTitle="Последнее сообщение"
-            titleRight="16:23"
-            countMessage={2}
-          />
-          <ProfileItem
-            nickname="Nickname"
-            avatar="https://i.pravatar.cc/296"
-            subTitle="Последнее сообщение"
-            titleRight="16:23"
-            countMessage={2}
-          />
-          <ProfileItem
-            nickname="Nickname"
-            avatar="https://i.pravatar.cc/296"
-            subTitle="Последнее сообщение"
-            titleRight="16:23"
-            countMessage={2}
-          />
-          <ProfileItem
-            nickname="Nickname"
-            avatar="https://i.pravatar.cc/296"
-            subTitle="Последнее сообщение"
-            titleRight="16:23"
-            countMessage={2}
-          />
-          <ProfileItem
-            nickname="Nickname"
-            avatar="https://i.pravatar.cc/296"
-            subTitle="Последнее сообщение"
-            titleRight="16:23"
-            countMessage={2}
-          />
-          <ProfileItem
-            nickname="Nickname"
-            avatar="https://i.pravatar.cc/296"
-            subTitle="Последнее сообщение"
-            titleRight="16:23"
-            countMessage={2}
-          />
-          <ProfileItem
-            nickname="Nickname"
-            avatar="https://i.pravatar.cc/296"
-            subTitle="Последнее сообщение"
-            titleRight="16:23"
-            countMessage={2}
-          />
-          <ProfileItem
-            nickname="Nickname"
-            avatar="https://i.pravatar.cc/296"
-            subTitle="Последнее сообщение"
-            titleRight="16:23"
-            countMessage={2}
-          />
+          {users.map((user: IProfileItemProps) => (
+            <ProfileItem
+              key={user.id}
+              id={user.id}
+              nickname={user.nickname}
+              isOnline={user.isOnline}
+              avatar={user.avatar}
+              subTitle={user.lastMessage || ''}
+              titleRight={formatLastMessageTime(String(user.lastMessageTime))}
+              countMessage={user.countMessage}
+              onPress={() => onChatPress()}
+            />
+          ))}
         </View>
       </ScrollView>
     </WView>

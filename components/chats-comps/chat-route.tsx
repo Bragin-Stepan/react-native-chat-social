@@ -29,6 +29,7 @@ const ChatRoute = React.memo((props: any) => {
         }}
         item={
           <ProfileItem
+            id={1}
             onPress={onProfilePress}
             nickname="Nickname"
             avatar="https://i.pravatar.cc/296"
