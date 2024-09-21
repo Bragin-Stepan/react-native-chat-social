@@ -10,7 +10,7 @@ const HeaderComponent = React.memo((props: IHeaderProps) => {
   return (
     <View style={styles.headerStyle}>
       {/* ======== Icons Left ======== */}
-      {props.iconsLeft && <IconsRow icons={props.iconsLeft} />}
+      {props.iconsLeft && <IconsRow side="Left" icons={props.iconsLeft} />}
 
       {/* ======== Title ======== */}
       {props.title && (
@@ -27,8 +27,7 @@ const HeaderComponent = React.memo((props: IHeaderProps) => {
       {props.placeholder && <HeaderSearch placeholder={props.placeholder} />}
 
       {/* ======== Icons Right ======== */}
-      <View />
-      {props.iconsRight && <IconsRow icons={props.iconsRight} />}
+      {props.iconsRight && <IconsRow side="Right" icons={props.iconsRight} />}
     </View>
   );
 });

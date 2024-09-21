@@ -9,9 +9,9 @@ const SettingsChatRoute = React.memo((props: any) => {
     <WView isParent>
       <HeaderComponent
         iconsLeft={[arrowLeftIcon]}
-        title="Настройки чата"
-        // placeholder="Найти чат..."
-        // iconsRight={[arrowLeftIcon]}
+        // title="Настройки чата"
+        placeholder="Найти чат..."
+        iconsRight={[arrowLeftIcon, arrowLeftIcon]}
       />
       <WText variant="T2">Экран настроек чата</WText>
     </WView>

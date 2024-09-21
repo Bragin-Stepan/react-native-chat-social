@@ -15,7 +15,11 @@ export const WInput = React.memo((props: IWInput) => {
     <View style={styles.inputContainer}>
       {/* Icons Left */}
       {props.iconsLeft && (
-        <IconsRow icons={props.iconsLeft} style={{marginLeft: spacing.sm}} />
+        <IconsRow
+          side="Left"
+          icons={props.iconsLeft}
+          style={{marginLeft: spacing.sm}}
+        />
       )}
       {/* Input Field */}
       <TextInput
@@ -35,7 +39,7 @@ export const WInput = React.memo((props: IWInput) => {
         placeholderTextColor={appColor.base_secondary_dark}
       />
       {/* Icons Right */}
-      {props.iconsRight && <IconsRow icons={props.iconsRight} />}
+      {props.iconsRight && <IconsRow side="Right" icons={props.iconsRight} />}
     </View>
   );
 });

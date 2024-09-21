@@ -3,7 +3,7 @@ import {View, Text} from 'react-native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {WView} from '../../shared/themed';
 import DefaultRoute from '../chats-comps/default-route';
-import {SettingsChatRoute} from '../chats-comps/chat-route';
+import {SettingsChatRoute} from '../chats-comps/settings-chat-route';
 
 const Stack = createNativeStackNavigator();
 
