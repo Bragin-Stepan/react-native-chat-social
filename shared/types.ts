@@ -1,10 +1,5 @@
 import {ViewProps, StyleProp, TextStyle} from 'react-native';
 
-// Define a type for the main slice state
-export interface IMainSlice {
-  value: number;
-}
-
 // View
 export interface IWView extends ViewProps {
   isParent?: boolean;

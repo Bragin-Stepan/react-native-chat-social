@@ -1,19 +1,21 @@
 import React from 'react';
 import {ScrollView, View} from 'react-native';
-import {WText, WView} from '../../shared/themed';
+import {LoadBlock, WText, WView} from '../../shared/themed';
 import {HeaderComponent} from '../header';
 import {ProfileItem} from '../shared/profile-item';
 import icons from '../../shared/icons';
 import {IProfileItemProps, TBaseIcon} from '../../shared/types';
 import {spacing} from '../../shared/sizes';
-import {getUsersInformation} from '../../shared/api/get-users-information';
 import {formatLastMessageTime} from '../../utils/time-format';
-import {formatLastOnlineTime} from '../../utils/online-format';
+
+import {fetchUsers} from '../../shared/redux/actions/users';
+import {useAppSelector, useAppDispatch} from '../../shared/redux/hooks';
 
 const DefaultRoute = React.memo((props: any) => {
+  const dispatch = useAppDispatch();
+  const {users, loading} = useAppSelector(state => state.users);
+
   const [isSearching, setIsSearching] = React.useState(false);
-  const [users, setUsers] = React.useState([]);
-  const [loading, setLoading] = React.useState(true);
 
   const settingsIcon: TBaseIcon = {
     icon: icons.settings,
@@ -40,27 +42,11 @@ const DefaultRoute = React.memo((props: any) => {
 
   // Вызов данных
   React.useEffect(() => {
-    const fetchUsers = async () => {
-      const userData = await getUsersInformation();
-      userData.sort((a: any, b: any) => {
-        return (
-          new Date(b.lastMessageTime).getTime() -
-          new Date(a.lastMessageTime).getTime()
-        );
-      });
-      setUsers(userData);
-      setLoading(false);
-    };
-
-    fetchUsers();
-  }, []);
+    dispatch(fetchUsers());
+  }, [dispatch]);
 
   if (loading) {
-    return (
-      <WView isParent>
-        <WText>{'Загрузка...'}</WText>
-      </WView>
-    );
+    return <LoadBlock />;
   }
 
   return (
@@ -71,9 +57,6 @@ const DefaultRoute = React.memo((props: any) => {
           : {title: 'Чаты', iconsRight: [searchIcon, settingsIcon]})}
       />
 
-      {/* {formatLastMessageTime}
-
-      {formatLastOnlineTime} */}
       <ScrollView>
         <View style={{paddingHorizontal: spacing.lg}}>
           {users.map((user: IProfileItemProps) => (
