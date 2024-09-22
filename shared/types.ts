@@ -20,6 +20,8 @@ export interface IIconsRow {
 
 // Input
 export interface IWInput extends IIconsRow {
+  textValue?: string;
+  onChangeText?: (text: string) => void;
   placeholder?: string;
   style?: StyleProp<TextStyle>;
 }

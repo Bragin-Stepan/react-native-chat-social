@@ -61,11 +61,13 @@ const ChatRoute = React.memo((props: any) => {
                 String(user.whenWasOnline),
                 user.isOnline,
               )}
-              customSubTitle={{
-                color: user.isOnline
-                  ? appColor.system_verified_normal
-                  : undefined,
-              }}
+              // customSubTitle = {user.isOnline &&appColor.system_verified_normal}}
+
+              customSubTitle={
+                user.isOnline
+                  ? {color: appColor.system_success_normal}
+                  : undefined
+              }
             />
           }
         />

@@ -35,6 +35,8 @@ export const WInput = React.memo((props: IWInput) => {
           },
           fontStyle.C1,
         ]}
+        value={props.textValue}
+        onChangeText={props.onChangeText}
         selectionColor={appColor.brand_primary_normal}
         placeholderTextColor={appColor.base_secondary_dark}
       />

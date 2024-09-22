@@ -20,6 +20,7 @@ const DefaultRoute = React.memo((props: any) => {
     state => state.userMessages,
   );
 
+  const [searchText, setSearchText] = React.useState('');
   const [isSearching, setIsSearching] = React.useState(false);
 
   const settingsIcon: TBaseIcon = {
@@ -31,6 +32,7 @@ const DefaultRoute = React.memo((props: any) => {
     icon: icons.arrow_left,
     onPress: () => {
       setIsSearching(!isSearching);
+      setSearchText('');
     },
   };
 
@@ -85,6 +87,10 @@ const DefaultRoute = React.memo((props: any) => {
       return bTime.diff(aTime); // Сортируем по убыванию
     });
 
+  const filteredUsers = sortedUsers.filter(user =>
+    user.nickname.toLowerCase().includes(searchText.toLowerCase()),
+  );
+
   const getUnreadMessagesCount = (userId: number) => {
     const chatMessages = userMessages.find(
       chat => chat.senderId === userId || chat.receiverId === userId,
@@ -103,13 +109,18 @@ const DefaultRoute = React.memo((props: any) => {
     <WView isParent>
       <HeaderComponent
         {...(isSearching
-          ? {iconsLeft: [closeSearchIcon], placeholder: 'Найти чат...'}
+          ? {
+              iconsLeft: [closeSearchIcon],
+              placeholder: 'Найти чат...',
+              textValue: {searchText},
+              onChangeText: {setSearchText},
+            }
           : {title: 'Чаты', iconsRight: [searchIcon, settingsIcon]})}
       />
 
       <ScrollView>
         <View style={{paddingHorizontal: spacing.lg}}>
-          {sortedUsers.map(user => (
+          {filteredUsers.map(user => (
             <ProfileItem
               key={user.id}
               id={user.id}
