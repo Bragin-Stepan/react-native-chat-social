@@ -4,12 +4,12 @@ import {fetchUsers} from '../actions/users';
 
 interface UserState {
   users: IProfileItemProps[];
-  loading: boolean;
+  usersLoading: boolean;
 }
 
 const initialState: UserState = {
   users: [],
-  loading: false,
+  usersLoading: false,
 };
 
 export const usersSlice = createSlice({
@@ -19,19 +19,14 @@ export const usersSlice = createSlice({
   extraReducers: builder => {
     builder
       .addCase(fetchUsers.pending, state => {
-        state.loading = true;
+        state.usersLoading = true;
       })
       .addCase(fetchUsers.fulfilled, (state, action) => {
-        state.users = action.payload.sort((a: any, b: any) => {
-          return (
-            new Date(b.lastMessageTime).getTime() -
-            new Date(a.lastMessageTime).getTime()
-          );
-        });
-        state.loading = false;
+        state.users = action.payload;
+        state.usersLoading = false;
       })
       .addCase(fetchUsers.rejected, state => {
-        state.loading = false;
+        state.usersLoading = false;
       });
   },
 });

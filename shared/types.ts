@@ -35,13 +35,27 @@ export interface IHeaderProps extends IIconsRow {
 export interface IProfileItemProps {
   id: number;
   nickname: string;
-  subTitle: string;
+  subTitle?: string;
   avatar: string;
-  lastMessage?: string;
-  lastMessageTime?: string;
   whenWasOnline?: string;
-  isOnline?: boolean;
+  isOnline: boolean;
   titleRight?: string;
   countMessage?: number;
   onPress?: () => void;
+}
+
+// Message
+export type TMessageProps = {
+  messageId: number;
+  content: string;
+  timestamp: string;
+  isRead: boolean;
+};
+
+// User messages
+export interface IUserMessagesState {
+  chatId: number;
+  senderId: number;
+  receiverId: number;
+  messages: TMessageProps[];
 }

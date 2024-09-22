@@ -22,7 +22,13 @@ export const ProfileItem = React.memo((props: IProfileItemProps) => {
 
   return (
     <TouchableOpacity style={styles.itemContainer} onPress={props.onPress}>
-      <View style={{flexDirection: 'row', justifyContent: 'center'}}>
+      <View
+        style={{
+          flex: 4,
+          flexDirection: 'row',
+          // backgroundColor: 'red',
+          // justifyContent: 'center',
+        }}>
         <View
           style={{
             justifyContent: 'center',
@@ -61,7 +67,7 @@ export const ProfileItem = React.memo((props: IProfileItemProps) => {
             customColor="base_primary_light"
             numberOfLines={1}
             ellipsizeMode="tail">
-            {props.subTitle}
+            {String(props.subTitle)}
           </WText>
         </View>
       </View>
@@ -69,6 +75,7 @@ export const ProfileItem = React.memo((props: IProfileItemProps) => {
         style={{
           height: 40,
           flex: 1,
+          // backgroundColor: 'red',
           justifyContent: 'space-between',
           alignItems: 'flex-end',
         }}>
@@ -76,6 +83,12 @@ export const ProfileItem = React.memo((props: IProfileItemProps) => {
           <WText
             variant="P2"
             customColor="base_primary_light"
+            style={{
+              flex: 1,
+              textAlign: 'right',
+              // backgroundColor: 'red',
+              minWidth: 60,
+            }}
             // style={{marginBottom: spacing.xxs}}
           >
             {props.titleRight}

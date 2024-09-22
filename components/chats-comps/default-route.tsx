@@ -10,10 +10,15 @@ import {formatLastMessageTime} from '../../utils/time-format';
 
 import {fetchUsers} from '../../shared/redux/actions/users';
 import {useAppSelector, useAppDispatch} from '../../shared/redux/hooks';
+import {fetchUserMessages} from '../../shared/redux/actions/user-messages';
+import moment from 'moment';
 
 const DefaultRoute = React.memo((props: any) => {
   const dispatch = useAppDispatch();
-  const {users, loading} = useAppSelector(state => state.users);
+  const {users, usersLoading} = useAppSelector(state => state.users);
+  const {userMessages, messagesLoading} = useAppSelector(
+    state => state.userMessages,
+  );
 
   const [isSearching, setIsSearching] = React.useState(false);
 
@@ -43,12 +48,57 @@ const DefaultRoute = React.memo((props: any) => {
   // Вызов данных
   React.useEffect(() => {
     dispatch(fetchUsers());
+    dispatch(fetchUserMessages());
   }, [dispatch]);
 
-  if (loading) {
+  if (usersLoading || messagesLoading) {
     return <LoadBlock />;
   }
 
+  const sortedUsers = users
+    .map((user: IProfileItemProps) => {
+      const userChat = userMessages.find(
+        message =>
+          message.senderId === user.id || message.receiverId === user.id,
+      );
+
+      // Если нет сообщений, устанавливаем null для последнего времени
+      const lastMessageTime =
+        userChat?.messages[userChat.messages.length - 1]?.timestamp || null;
+      const lastMessage =
+        userChat?.messages[userChat.messages.length - 1]?.content || '';
+
+      return {
+        ...user,
+        lastMessageTime,
+        lastMessage,
+      };
+    })
+    .sort((a, b) => {
+      // Если временная метка отсутствует, помечаем пользователя как с минимальным временем
+      if (!a.lastMessageTime) return 1;
+      if (!b.lastMessageTime) return -1;
+
+      const aTime = moment(a.lastMessageTime);
+      const bTime = moment(b.lastMessageTime);
+
+      return bTime.diff(aTime); // Сортируем по убыванию
+    });
+
+  const getUnreadMessagesCount = (userId: number) => {
+    const chatMessages = userMessages.find(
+      chat => chat.senderId === userId || chat.receiverId === userId,
+    );
+    if (!chatMessages) return 0;
+
+    // Assuming logged in user ID is 0 (change it to actual logged-in user ID)
+    const loggedInUserId = 0;
+
+    const unreadMessages = chatMessages.messages.filter(
+      message => !message.isRead && userId !== loggedInUserId,
+    );
+    return unreadMessages.length;
+  };
   return (
     <WView isParent>
       <HeaderComponent
@@ -59,16 +109,20 @@ const DefaultRoute = React.memo((props: any) => {
 
       <ScrollView>
         <View style={{paddingHorizontal: spacing.lg}}>
-          {users.map((user: IProfileItemProps) => (
+          {sortedUsers.map(user => (
             <ProfileItem
               key={user.id}
               id={user.id}
               nickname={user.nickname}
               isOnline={user.isOnline}
               avatar={user.avatar}
-              subTitle={user.lastMessage || ''}
-              titleRight={formatLastMessageTime(String(user.lastMessageTime))}
-              countMessage={user.countMessage}
+              subTitle={user.lastMessage || 'Нет сообщений'}
+              titleRight={
+                user.lastMessageTime
+                  ? formatLastMessageTime(String(user.lastMessageTime))
+                  : '—'
+              }
+              countMessage={getUnreadMessagesCount(user.id)}
               onPress={() => onChatPress()}
             />
           ))}

@@ -1,4 +1,3 @@
-import React from 'react';
 import {URL_USERS_INFORMATION} from '../constants';
 
 export const getUsersInformation = async () => {
