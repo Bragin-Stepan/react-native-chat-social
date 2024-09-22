@@ -39,6 +39,7 @@ export interface IProfileItemProps {
   avatar: string;
   whenWasOnline?: string;
   isOnline: boolean;
+  customSubTitle?: StyleProp<TextStyle>;
   titleRight?: string;
   countMessage?: number;
   onPress?: () => void;

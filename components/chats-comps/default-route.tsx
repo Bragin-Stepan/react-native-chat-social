@@ -41,8 +41,8 @@ const DefaultRoute = React.memo((props: any) => {
     },
   };
 
-  const onChatPress = () => {
-    props.navigation.navigate('chatPage');
+  const onChatPress = (userId: number) => {
+    props.navigation.navigate('chatPage', {userId});
   };
 
   // Вызов данных
@@ -116,14 +116,10 @@ const DefaultRoute = React.memo((props: any) => {
               nickname={user.nickname}
               isOnline={user.isOnline}
               avatar={user.avatar}
-              subTitle={user.lastMessage || 'Нет сообщений'}
-              titleRight={
-                user.lastMessageTime
-                  ? formatLastMessageTime(String(user.lastMessageTime))
-                  : '—'
-              }
+              subTitle={user.lastMessage}
+              titleRight={formatLastMessageTime(String(user.lastMessageTime))}
               countMessage={getUnreadMessagesCount(user.id)}
-              onPress={() => onChatPress()}
+              onPress={() => onChatPress(user.id)}
             />
           ))}
         </View>

@@ -7,7 +7,6 @@ import {IProfileItemProps} from '../../shared/types';
 
 export const ProfileItem = React.memo((props: IProfileItemProps) => {
   const appColor = useAppColor();
-
   const [isOnline, setIsOnline] = React.useState(props.isOnline);
 
   const formatCountMessage = (count: number) => {
@@ -22,48 +21,31 @@ export const ProfileItem = React.memo((props: IProfileItemProps) => {
 
   return (
     <TouchableOpacity style={styles.itemContainer} onPress={props.onPress}>
-      <View
-        style={{
-          flex: 4,
-          flexDirection: 'row',
-          // backgroundColor: 'red',
-          // justifyContent: 'center',
-        }}>
-        <View
-          style={{
-            justifyContent: 'center',
-          }}>
+      <View style={styles.profileContainer}>
+        <View style={styles.imageContainer}>
           <Image
-            style={{
-              height: 50,
-              width: 50,
-              borderRadius: 30,
-              borderWidth: 3,
-              borderColor: isOnline
-                ? appColor.system_success_normal
-                : appColor.base_secondary_dark,
-            }}
+            style={[
+              styles.avatar,
+              {
+                borderColor: isOnline
+                  ? appColor.system_success_normal
+                  : appColor.base_secondary_dark,
+              },
+            ]}
             source={{uri: props.avatar}}
           />
         </View>
-        <View
-          style={{
-            marginLeft: spacing.md,
-            maxWidth: '80%',
-            height: 40,
-            justifyContent: 'space-between',
-          }}>
+        <View style={styles.textContainer}>
           <WText
-            variant="C1"
+            variant="T3"
             customColor="base_primary_dark"
             numberOfLines={1}
-            ellipsizeMode="tail"
-            // style={{marginBottom: spacing.xxs}}
-          >
+            ellipsizeMode="tail">
             {props.nickname}
           </WText>
           <WText
-            variant="P2"
+            style={props.customSubTitle}
+            variant="P1"
             customColor="base_primary_light"
             numberOfLines={1}
             ellipsizeMode="tail">
@@ -71,46 +53,29 @@ export const ProfileItem = React.memo((props: IProfileItemProps) => {
           </WText>
         </View>
       </View>
-      <View
-        style={{
-          height: 40,
-          flex: 1,
-          // backgroundColor: 'red',
-          justifyContent: 'space-between',
-          alignItems: 'flex-end',
-        }}>
+      <View style={styles.countContainer}>
         {props.titleRight && (
           <WText
-            variant="P2"
+            variant="P1"
             customColor="base_primary_light"
-            style={{
-              flex: 1,
-              textAlign: 'right',
-              // backgroundColor: 'red',
-              minWidth: 60,
-            }}
-            // style={{marginBottom: spacing.xxs}}
-          >
+            style={styles.titleRightText}>
             {props.titleRight}
           </WText>
         )}
-        <View
-          style={{
-            borderRadius: 30,
-            paddingHorizontal: spacing.xs,
-            alignItems: 'center',
-            justifyContent: 'center',
-            backgroundColor: appColor.brand_primary_normal,
-          }}>
-          {props.countMessage && props.countMessage >= 0 ? (
+        {props.countMessage && props.countMessage >= 0 ? (
+          <View
+            style={[
+              styles.countBubble,
+              {backgroundColor: appColor.brand_primary_normal},
+            ]}>
             <WText
-              variant="C2"
+              variant="B2"
               customColor="base_secondary_light"
-              style={{margin: 1}}>
+              style={styles.countText}>
               {formatCountMessage(props.countMessage)}
             </WText>
-          ) : null}
-        </View>
+          </View>
+        ) : null}
       </View>
     </TouchableOpacity>
   );
@@ -121,8 +86,49 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingVertical: spacing.md,
     flexDirection: 'row',
-    // backgroundColor: '#b3d0f1',
     alignItems: 'center',
     justifyContent: 'space-between',
   },
+  profileContainer: {
+    flex: 7,
+    flexDirection: 'row',
+  },
+  imageContainer: {
+    justifyContent: 'center',
+  },
+  avatar: {
+    height: 50,
+    width: 50,
+    borderRadius: 30,
+    borderWidth: 3,
+  },
+  textContainer: {
+    marginLeft: spacing.md,
+    maxWidth: '80%',
+    height: 40,
+    justifyContent: 'space-between',
+  },
+  countContainer: {
+    height: 50,
+    marginTop: -spacing.md,
+    flex: 1,
+    justifyContent: 'space-between',
+    alignItems: 'flex-end',
+  },
+  titleRightText: {
+    flex: 1,
+    textAlign: 'right',
+    minWidth: 80,
+  },
+  countBubble: {
+    borderRadius: 30,
+    paddingHorizontal: spacing.xs,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  countText: {
+    margin: 1,
+  },
 });
+
+export default ProfileItem;
