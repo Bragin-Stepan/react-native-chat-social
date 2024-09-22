@@ -1,5 +1,4 @@
 import React from 'react';
-
 import {View, StyleSheet} from 'react-native';
 import {WInput} from '../../shared/themed';
 import icons from '../../shared/icons';
@@ -13,6 +12,7 @@ const searchIcon: TBaseIcon = {
 
 const HeaderSearch = React.memo((props: any) => {
   const appColor = useAppColor();
+
   return (
     <View
       style={[
@@ -23,6 +23,8 @@ const HeaderSearch = React.memo((props: any) => {
         placeholder={props.placeholder}
         style={styles.input}
         iconsLeft={[searchIcon]}
+        textValue={props.textValue}
+        onChangeText={props.onChangeText}
       />
     </View>
   );

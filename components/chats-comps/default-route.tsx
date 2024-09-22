@@ -12,6 +12,7 @@ import {fetchUsers} from '../../shared/redux/actions/users';
 import {useAppSelector, useAppDispatch} from '../../shared/redux/hooks';
 import {fetchUserMessages} from '../../shared/redux/actions/user-messages';
 import moment from 'moment';
+import {setInputTerm} from '../../shared/redux/reducers/input';
 
 const DefaultRoute = React.memo((props: any) => {
   const dispatch = useAppDispatch();
@@ -20,8 +21,8 @@ const DefaultRoute = React.memo((props: any) => {
     state => state.userMessages,
   );
 
-  const [searchText, setSearchText] = React.useState('');
-  const [isSearching, setIsSearching] = React.useState(false);
+  const {inputTerm} = useAppSelector(state => state.input);
+  const [isFiltering, setIsFiltering] = React.useState(false);
 
   const settingsIcon: TBaseIcon = {
     icon: icons.settings,
@@ -31,15 +32,15 @@ const DefaultRoute = React.memo((props: any) => {
   const closeSearchIcon: TBaseIcon = {
     icon: icons.arrow_left,
     onPress: () => {
-      setIsSearching(!isSearching);
-      setSearchText('');
+      setIsFiltering(false);
+      dispatch(setInputTerm(''));
     },
   };
 
   const searchIcon: TBaseIcon = {
     icon: icons.search_outline,
     onPress: () => {
-      setIsSearching(!isSearching);
+      setIsFiltering(true);
     },
   };
 
@@ -88,7 +89,7 @@ const DefaultRoute = React.memo((props: any) => {
     });
 
   const filteredUsers = sortedUsers.filter(user =>
-    user.nickname.toLowerCase().includes(searchText.toLowerCase()),
+    user.nickname.toLowerCase().includes(inputTerm.toLowerCase()),
   );
 
   const getUnreadMessagesCount = (userId: number) => {
@@ -108,12 +109,14 @@ const DefaultRoute = React.memo((props: any) => {
   return (
     <WView isParent>
       <HeaderComponent
-        {...(isSearching
+        {...(isFiltering
           ? {
               iconsLeft: [closeSearchIcon],
               placeholder: 'Найти чат...',
-              textValue: {searchText},
-              onChangeText: {setSearchText},
+              textValue: inputTerm,
+              onChangeText: (value: string) => {
+                dispatch(setInputTerm(value));
+              },
             }
           : {title: 'Чаты', iconsRight: [searchIcon, settingsIcon]})}
       />

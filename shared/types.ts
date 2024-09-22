@@ -27,7 +27,7 @@ export interface IWInput extends IIconsRow {
 }
 
 // Header
-export interface IHeaderProps extends IIconsRow {
+export interface IHeaderProps extends IWInput {
   title?: string;
   placeholder?: string;
   item?: any;

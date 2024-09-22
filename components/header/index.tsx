@@ -31,7 +31,13 @@ const HeaderComponent = React.memo((props: IHeaderProps) => {
       {props.item}
 
       {/* ======== Search ======== */}
-      {props.placeholder && <HeaderSearch placeholder={props.placeholder} />}
+      {props.placeholder && (
+        <HeaderSearch
+          placeholder={props.placeholder}
+          textValue={props.textValue}
+          onChangeText={props.onChangeText}
+        />
+      )}
 
       {/* ======== Icons Right ======== */}
       {props.iconsRight && <IconsRow side="Right" icons={props.iconsRight} />}
