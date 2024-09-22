@@ -1,9 +1,9 @@
 import React from 'react';
-import {WText, WView} from '../../shared/themed';
-import {HeaderComponent} from '../header';
-import useAppColor from '../../shared/colors/use-color';
-import {arrowLeftIcon} from '../button';
-import {spacing} from '../../shared/sizes';
+import {WText, WView} from '../../../shared/themed';
+import {HeaderComponent} from '../../header';
+import useAppColor from '../../../shared/colors/use-color';
+import {arrowLeftIcon} from '../../button';
+import {spacing} from '../../../shared/sizes';
 
 const ChatSettingsRoute = React.memo((props: any) => {
   return (

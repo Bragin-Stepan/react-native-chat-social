@@ -56,7 +56,7 @@ export const ProfileItem = React.memo((props: IProfileItemProps) => {
       <View style={styles.countContainer}>
         {props.titleRight && (
           <WText
-            variant="P1"
+            variant="C1"
             customColor="base_primary_light"
             style={styles.titleRightText}>
             {props.titleRight}
@@ -90,7 +90,8 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   profileContainer: {
-    flex: 7,
+    // flex: 8,
+    // backgroundColor: 'red',
     flexDirection: 'row',
   },
   imageContainer: {
@@ -103,14 +104,15 @@ const styles = StyleSheet.create({
     borderWidth: 3,
   },
   textContainer: {
+    flex: 1,
     marginLeft: spacing.md,
-    maxWidth: '80%',
+    maxWidth: '70%',
     height: 40,
     justifyContent: 'space-between',
   },
   countContainer: {
-    height: 50,
-    marginTop: -spacing.md,
+    height: 46,
+    marginTop: -spacing.sm,
     flex: 1,
     justifyContent: 'space-between',
     alignItems: 'flex-end',
