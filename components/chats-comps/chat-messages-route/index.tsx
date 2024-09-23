@@ -88,7 +88,7 @@ const ChatMessagesRoute = React.memo((props: any) => {
       <ScrollView
         style={[
           styles.scrollContent,
-          {backgroundColor: appColor.base_secondary_normal},
+          {backgroundColor: '#e6f1ff'}, // base_secondary_normal
         ]}>
         {chatMessages?.messages.map((message, index) => (
           <View
@@ -98,10 +98,18 @@ const ChatMessagesRoute = React.memo((props: any) => {
               {backgroundColor: appColor.base_secondary_light},
               isMyMessage ? styles.myMessage : styles.theirMessage,
             ]}>
+            <View
+              style={[
+                styles.tab,
+                {backgroundColor: appColor.base_secondary_light},
+              ]}
+            />
             <WText variant="P1">{message.content}</WText>
-            <WText variant="C1" style={styles.timeText}>
-              {formaHoursMinutesTime(message.timestamp)}
-            </WText>
+            <View style={{flexDirection: 'row', alignSelf: 'flex-end'}}>
+              <WText variant="C1" style={styles.timeText}>
+                {formaHoursMinutesTime(message.timestamp)}
+              </WText>
+            </View>
           </View>
         ))}
       </ScrollView>
@@ -120,13 +128,16 @@ const styles = StyleSheet.create({
     padding: spacing.lg,
   },
   messageContainer: {
-    // flexDirection: 'row',
+    shadowOffset: {
+      width: 4,
+      height: 4,
+    },
     marginBottom: spacing.md,
     paddingHorizontal: spacing.lg,
     paddingVertical: spacing.md,
-    paddingRight: spacing.lg,
     borderRadius: borderRadius.md,
     maxWidth: '80%',
+    position: 'relative',
   },
   myMessage: {
     alignSelf: 'flex-end',
@@ -134,9 +145,18 @@ const styles = StyleSheet.create({
   theirMessage: {
     alignSelf: 'flex-start',
   },
+  tab: {
+    position: 'absolute',
+    bottom: 0,
+    left: -7,
+    width: 20,
+    height: 10,
+    borderTopLeftRadius: 8,
+    borderBottomLeftRadius: 14,
+    borderBottomRightRadius: 6,
+  },
   timeText: {
     marginTop: spacing.xs,
-    marginRight: spacing.sm,
     alignSelf: 'flex-end',
   },
 });
