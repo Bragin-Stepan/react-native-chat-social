@@ -17,7 +17,8 @@ export const LoadHeader = React.memo((props: any) => {
           height: 40,
           backgroundColor: appColor.base_secondary_normal,
           width: '40%',
-          margin: spacing.lg,
+          marginHorizontal: spacing.lg,
+          marginVertical: spacing.md,
         }}
       />
       {props.children}

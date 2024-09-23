@@ -66,13 +66,14 @@ const DefaultRoute = React.memo((props: any) => {
       <LoadHeader>
         <View
           style={{
+            marginTop: spacing.md,
             paddingHorizontal: spacing.lg,
           }}>
           {placeholders.map(item => (
             <View
               key={item.index}
               style={{
-                height: 45,
+                height: 53,
                 backgroundColor: appColor.base_secondary_normal,
                 borderRadius: 50,
                 marginBottom: spacing.lg,
@@ -114,8 +115,10 @@ const DefaultRoute = React.memo((props: any) => {
               nickname={user.nickname}
               isOnline={user.isOnline}
               avatar={user.avatar}
-              subTitle={user.lastMessage}
-              titleRight={formatLastMessageTime(String(user.lastMessageTime))}
+              subTitle={(user as any).lastMessage}
+              titleRight={formatLastMessageTime(
+                String((user as any).lastMessageTime),
+              )}
               countMessage={getUnreadMessagesCount(user.id, userMessages)}
               onPress={() =>
                 props.navigation.navigate('chatPage', {userId: user.id})

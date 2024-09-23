@@ -3,22 +3,21 @@ import {LoadHeader, WText, WView} from '../../../shared/themed';
 import {HeaderComponent} from '../../header';
 import useAppColor from '../../../shared/colors/use-color';
 import {arrowLeftIcon} from '../../button';
-import {spacing} from '../../../shared/sizes';
+import {borderRadius, spacing} from '../../../shared/sizes';
 import icons from '../../../shared/icons';
 import {TBaseIcon} from '../../../shared/types';
 import {ProfileItem} from '../../shared/profile-item';
-import {getUsersInformation} from '../../../shared/api';
 import {useAppDispatch, useAppSelector} from '../../../shared/redux/hooks';
 import {fetchUserMessages} from '../../../shared/redux/actions/user-messages';
 import {fetchUsers} from '../../../shared/redux/actions/users';
 import {formatLastOnlineTime} from '../../../utils/online-format';
-import {View} from 'react-native';
+import {ScrollView, View, StyleSheet} from 'react-native';
+import {formaHoursMinutesTime} from '../../../utils/time-format';
+import {MY_ID} from '../../../shared/constants';
 
 const dotsIcon: TBaseIcon = {
   icon: icons.dots,
-  onPress: () => {
-    null;
-  },
+  onPress: () => null,
 };
 
 const ChatMessagesRoute = React.memo((props: any) => {
@@ -33,25 +32,30 @@ const ChatMessagesRoute = React.memo((props: any) => {
 
   const user = users.find(user => user.id === userId);
 
-  // Вызов данных
+  const chatMessages = userMessages.find(
+    chat => chat.senderId === userId && chat.receiverId === MY_ID,
+  );
+
+  const isMyMessage = userId === 0;
+
   React.useEffect(() => {
     dispatch(fetchUsers());
     dispatch(fetchUserMessages());
   }, [dispatch]);
 
-  // Загрузка
   if (usersLoading || messagesLoading) {
     return (
       <View
-        style={{
-          backgroundColor: appColor.base_secondary_normal,
-          height: '100%',
-        }}>
+        style={[
+          styles.loadingContainer,
+          {backgroundColor: appColor.base_secondary_normal},
+        ]}>
         <View
-          style={{
-            backgroundColor: appColor.base_secondary_light,
-            height: '8%',
-          }}></View>
+          style={[
+            styles.headerPlaceholder,
+            {backgroundColor: appColor.base_secondary_light},
+          ]}
+        />
       </View>
     );
   }
@@ -74,29 +78,67 @@ const ChatMessagesRoute = React.memo((props: any) => {
                 String(user.whenWasOnline),
                 user.isOnline,
               )}
-              // customSubTitle = {user.isOnline &&appColor.system_verified_normal}}
-
               customSubTitle={
-                user.isOnline
-                  ? {color: appColor.system_success_normal}
-                  : undefined
+                user.isOnline && {color: appColor.system_success_normal}
               }
             />
           }
         />
       )}
-      <WView
-        style={{
-          height: '100%',
-          backgroundColor: appColor.base_secondary_normal,
-        }}>
-        <WText variant="T2" style={{paddingHorizontal: spacing.lg}}>
-          {/* {String(user?.lastMessage)} */}
-          {`ID:${String(userId)}`}
-        </WText>
-      </WView>
+      <ScrollView
+        style={[
+          styles.scrollContent,
+          {backgroundColor: appColor.base_secondary_normal},
+        ]}>
+        {chatMessages?.messages.map((message, index) => (
+          <View
+            key={index}
+            style={[
+              styles.messageContainer,
+              {backgroundColor: appColor.base_secondary_light},
+              isMyMessage ? styles.myMessage : styles.theirMessage,
+            ]}>
+            <WText variant="P1">{message.content}</WText>
+            <WText variant="C1" style={styles.timeText}>
+              {formaHoursMinutesTime(message.timestamp)}
+            </WText>
+          </View>
+        ))}
+      </ScrollView>
     </WView>
   );
+});
+
+const styles = StyleSheet.create({
+  loadingContainer: {
+    height: '100%',
+  },
+  headerPlaceholder: {
+    height: '8%',
+  },
+  scrollContent: {
+    padding: spacing.lg,
+  },
+  messageContainer: {
+    // flexDirection: 'row',
+    marginBottom: spacing.md,
+    paddingHorizontal: spacing.lg,
+    paddingVertical: spacing.md,
+    paddingRight: spacing.lg,
+    borderRadius: borderRadius.md,
+    maxWidth: '80%',
+  },
+  myMessage: {
+    alignSelf: 'flex-end',
+  },
+  theirMessage: {
+    alignSelf: 'flex-start',
+  },
+  timeText: {
+    marginTop: spacing.xs,
+    marginRight: spacing.sm,
+    alignSelf: 'flex-end',
+  },
 });
 
 export {ChatMessagesRoute};
