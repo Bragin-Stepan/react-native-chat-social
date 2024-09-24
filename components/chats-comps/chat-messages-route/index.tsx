@@ -32,11 +32,7 @@ const ChatMessagesRoute = React.memo((props: any) => {
 
   const user = users.find(user => user.id === userId);
 
-  const chatMessages = userMessages.find(
-    chat => chat.senderId === userId && chat.receiverId === MY_ID,
-  );
-
-  const isMyMessage = userId === 0;
+  const chatMessages = userMessages.find(chat => chat.senderId === userId);
 
   React.useEffect(() => {
     dispatch(fetchUsers());
@@ -59,7 +55,6 @@ const ChatMessagesRoute = React.memo((props: any) => {
       </View>
     );
   }
-
   return (
     <WView isParent>
       {user && (
@@ -88,30 +83,51 @@ const ChatMessagesRoute = React.memo((props: any) => {
       <ScrollView
         style={[
           styles.scrollContent,
-          {backgroundColor: '#e6f1ff'}, // base_secondary_normal
+          {backgroundColor: appColor.base_secondary_normal}, // base_secondary_normal
         ]}>
-        {chatMessages?.messages.map((message, index) => (
-          <View
-            key={index}
-            style={[
-              styles.messageContainer,
-              {backgroundColor: appColor.base_secondary_light},
-              isMyMessage ? styles.myMessage : styles.theirMessage,
-            ]}>
+        {chatMessages?.messages.map((message, index) => {
+          const myMessage = message.senderId === MY_ID;
+          return (
             <View
+              key={index}
               style={[
-                styles.tab,
-                {backgroundColor: appColor.base_secondary_light},
-              ]}
-            />
-            <WText variant="P1">{message.content}</WText>
-            <View style={{flexDirection: 'row', alignSelf: 'flex-end'}}>
-              <WText variant="C1" style={styles.timeText}>
-                {formaHoursMinutesTime(message.timestamp)}
-              </WText>
+                styles.messageContainer,
+                myMessage
+                  ? {
+                      backgroundColor: '#ebeaff',
+                      alignSelf: 'flex-end',
+                    }
+                  : {
+                      backgroundColor: appColor.base_secondary_light,
+                      alignSelf: 'flex-start',
+                    },
+              ]}>
+              <View
+                style={
+                  myMessage
+                    ? [styles.myTab, {backgroundColor: '#ebeaff'}]
+                    : [
+                        styles.theirTab,
+                        {backgroundColor: appColor.base_secondary_light},
+                      ]
+                  // styles.theirTab,
+                  // {backgroundColor: appColor.base_secondary_light},
+                }
+              />
+              <WText variant="P1">{message.content}</WText>
+              <View style={{flexDirection: 'row', alignSelf: 'flex-end'}}>
+                <WText
+                  variant="C1"
+                  // customColor={
+                  //   myMessage ? 'system_verified_normal' : 'base_primary_light'
+                  // }
+                  style={styles.timeText}>
+                  {formaHoursMinutesTime(message.timestamp)}
+                </WText>
+              </View>
             </View>
-          </View>
-        ))}
+          );
+        })}
       </ScrollView>
     </WView>
   );
@@ -136,16 +152,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: spacing.lg,
     paddingVertical: spacing.md,
     borderRadius: borderRadius.md,
-    maxWidth: '80%',
+    maxWidth: '90%',
     position: 'relative',
   },
-  myMessage: {
-    alignSelf: 'flex-end',
-  },
-  theirMessage: {
-    alignSelf: 'flex-start',
-  },
-  tab: {
+  theirTab: {
     position: 'absolute',
     bottom: 0,
     left: -7,
@@ -154,6 +164,16 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 8,
     borderBottomLeftRadius: 14,
     borderBottomRightRadius: 6,
+  },
+  myTab: {
+    position: 'absolute',
+    bottom: 0,
+    right: -7,
+    width: 20,
+    height: 10,
+    borderTopRightRadius: 8,
+    borderBottomRightRadius: 14,
+    borderBottomLeftRadius: 6,
   },
   timeText: {
     marginTop: spacing.xs,

@@ -1,5 +1,6 @@
 import moment from 'moment';
 import {IProfileItemProps} from '../../../shared/types';
+import {MY_ID} from '../../../shared/constants';
 
 // Sorted Users
 export const getSortedUsers = (
@@ -9,8 +10,7 @@ export const getSortedUsers = (
   return users
     .map(user => {
       const userChat = userMessages.find(
-        message =>
-          message.senderId === user.id || message.receiverId === user.id,
+        message => message.senderId === user.id,
       );
       const lastMessageTime =
         userChat?.messages[userChat.messages.length - 1]?.timestamp || null;
@@ -36,18 +36,14 @@ export const filterUsers = (users: IProfileItemProps[], searchTerm: string) => {
     user.nickname.toLowerCase().includes(searchTerm.toLowerCase()),
   );
 };
-
 // Unread Messages Count
 export const getUnreadMessagesCount = (userId: number, userMessages: any[]) => {
-  const chatMessages = userMessages.find(
-    chat => chat.senderId === userId || chat.receiverId === userId,
-  );
+  const chatMessages = userMessages.find(chat => chat.senderId === userId);
   if (!chatMessages) return 0;
 
-  const loggedInUserId = 0;
   const unreadMessages = chatMessages.messages.filter(
-    (message: {isRead: boolean}) =>
-      !message.isRead && userId !== loggedInUserId,
+    (message: {isRead: boolean; senderId: number}) =>
+      !message.isRead && userId !== MY_ID,
   );
   return unreadMessages.length;
 };

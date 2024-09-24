@@ -49,7 +49,7 @@ export interface IProfileItemProps {
 
 // Message
 export type TMessageProps = {
-  messageId: number;
+  senderId: number;
   content: string;
   timestamp: string;
   isRead: boolean;
@@ -59,6 +59,5 @@ export type TMessageProps = {
 export interface IUserMessagesState {
   chatId: number;
   senderId: number;
-  receiverId: number;
   messages: TMessageProps[];
 }
