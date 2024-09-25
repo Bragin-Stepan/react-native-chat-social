@@ -43,7 +43,7 @@ export const getUnreadMessagesCount = (userId: number, userMessages: any[]) => {
 
   const unreadMessages = chatMessages.messages.filter(
     (message: {isRead: boolean; senderId: number}) =>
-      !message.isRead && userId !== MY_ID,
+      !message.isRead && message.senderId !== MY_ID,
   );
   return unreadMessages.length;
 };
