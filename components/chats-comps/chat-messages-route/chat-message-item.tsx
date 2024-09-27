@@ -43,10 +43,12 @@ const MessageItem: React.FC<MessageItemProps> = ({message}) => {
         <WText variant="P1" style={styles.messageText}>
           {`${words.join(
             ' ',
-            //Да, это такой отступ
-          )}\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0`}
+            // Да, это такой отступ, так нужно
+          )}\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0`}
         </WText>
-        <WText variant="C1" style={styles.timeText}>
+        <WText
+          variant="P2"
+          style={[styles.timeText, {color: appColor.base_primary_light}]}>
           {` ${timeSent}`}
         </WText>
       </View>
