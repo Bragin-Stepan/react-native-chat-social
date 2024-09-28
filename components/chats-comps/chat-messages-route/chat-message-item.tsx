@@ -5,12 +5,14 @@ import {borderRadius, spacing} from '../../../shared/sizes';
 import {formaHoursMinutesTime} from '../../../utils/time-format';
 import useAppColor from '../../../shared/colors/use-color';
 import {MY_ID} from '../../../shared/constants';
+import {TBaseIcon} from '../../../shared/types';
+import icons from '../../../shared/icons';
 
 interface MessageItemProps {
   message: any;
 }
 
-const MessageItem: React.FC<MessageItemProps> = ({message}) => {
+const MessageItem: React.FC<MessageItemProps> = ({message, ...props}) => {
   const appColor = useAppColor();
   const myMessage = message.senderId === MY_ID;
   const words = message.content.split(' ');
@@ -44,13 +46,19 @@ const MessageItem: React.FC<MessageItemProps> = ({message}) => {
           {`${words.join(
             ' ',
             // Да, это такой отступ, так нужно
-          )}\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0`}
+          )}${
+            myMessage
+              ? '\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0'
+              : '\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0'
+          }`}
         </WText>
-        <WText
-          variant="P2"
-          style={[styles.timeText, {color: appColor.base_primary_light}]}>
-          {` ${timeSent}`}
-        </WText>
+        <View style={styles.timeWrapper}>
+          {(myMessage && message.isRead && icons.chat_check_read) ||
+            (myMessage && !message.isRead && icons.chat_check_delivered)}
+          <WText variant="P2" style={{color: appColor.base_primary_light}}>
+            {` ${timeSent}`}
+          </WText>
+        </View>
       </View>
     </View>
   );
@@ -63,7 +71,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: spacing.lg,
     paddingVertical: spacing.md,
     borderRadius: borderRadius.md,
-    maxWidth: '90%',
+    maxWidth: '85%',
     position: 'relative',
   },
   theirTab: {
@@ -86,7 +94,10 @@ const styles = StyleSheet.create({
     borderBottomRightRadius: 14,
     borderBottomLeftRadius: 6,
   },
-  timeText: {
+  timeWrapper: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
     position: 'absolute',
     right: 2,
     bottom: 1,

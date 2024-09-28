@@ -22,6 +22,10 @@ import Search from '../../assets/icons/system/search.png';
 import Settings from '../../assets/icons/system/settings.png';
 // @ts-ignore
 import Dots from '../../assets/icons/system/dots.png';
+// @ts-ignore
+import ChatCheckDelivered from '../../assets/icons/system/chat_check_delivered.png';
+// @ts-ignore
+import ChatCheckRead from '../../assets/icons/system/chat_check_read.png';
 
 export default {
   ChatOutline,
@@ -36,4 +40,6 @@ export default {
   Search,
   Settings,
   Dots,
+  ChatCheckDelivered,
+  ChatCheckRead,
 };

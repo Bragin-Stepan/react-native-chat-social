@@ -82,4 +82,16 @@ export default {
       style={{width: iconSmallSize, height: iconSmallSize}}
     />
   ),
+  chat_check_read: (
+    <Image
+      source={iconSources.ChatCheckRead}
+      style={{width: iconSmallSize, height: iconSmallSize}}
+    />
+  ),
+  chat_check_delivered: (
+    <Image
+      source={iconSources.ChatCheckDelivered}
+      style={{width: iconSmallSize, height: iconSmallSize}}
+    />
+  ),
 };
