@@ -5,19 +5,27 @@ import {borderRadius, spacing} from '../../../shared/sizes';
 import {formaHoursMinutesTime} from '../../../utils/time-format';
 import useAppColor from '../../../shared/colors/use-color';
 import {MY_ID} from '../../../shared/constants';
-import {TBaseIcon} from '../../../shared/types';
 import icons from '../../../shared/icons';
 
 interface MessageItemProps {
   message: any;
 }
 
-const MessageItem: React.FC<MessageItemProps> = ({message, ...props}) => {
+const MessageItem: React.FC<MessageItemProps> = ({message}) => {
   const appColor = useAppColor();
   const myMessage = message.senderId === MY_ID;
   const words = message.content.split(' ');
-
   const timeSent = formaHoursMinutesTime(message.timestamp);
+
+  const messageTimeTextSpacing = myMessage
+    ? '\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0'
+    : '\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0';
+
+  const messageCheckIcon = myMessage
+    ? message.isRead
+      ? icons.chat_check_read
+      : icons.chat_check_delivered
+    : null;
 
   return (
     <View
@@ -31,31 +39,26 @@ const MessageItem: React.FC<MessageItemProps> = ({message, ...props}) => {
             },
       ]}>
       <View
-        style={
+        style={[
           myMessage
             ? [styles.myTab, {backgroundColor: '#ebeaff'}]
             : [
                 styles.theirTab,
                 {backgroundColor: appColor.base_secondary_light},
-              ]
-        }
+              ],
+        ]}
       />
 
       <View>
         <WText variant="P1" style={styles.messageText}>
-          {`${words.join(
-            ' ',
-            // Да, это такой отступ, так нужно
-          )}${
-            myMessage
-              ? '\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0'
-              : '\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0'
-          }`}
+          {`${words.join(' ')}${messageTimeTextSpacing}`}
         </WText>
+
         <View style={styles.timeWrapper}>
-          {(myMessage && message.isRead && icons.chat_check_read) ||
-            (myMessage && !message.isRead && icons.chat_check_delivered)}
-          <WText variant="P2" style={{color: appColor.base_primary_light}}>
+          {messageCheckIcon}
+          <WText
+            variant="P2"
+            style={[styles.timeText, {color: appColor.base_primary_light}]}>
             {` ${timeSent}`}
           </WText>
         </View>
@@ -95,12 +98,14 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 6,
   },
   timeWrapper: {
-    display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
     position: 'absolute',
-    right: 2,
+    right: 1,
     bottom: 1,
+  },
+  timeText: {
+    marginLeft: 2,
   },
   messageText: {
     flexDirection: 'row',

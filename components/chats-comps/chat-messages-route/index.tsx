@@ -1,5 +1,6 @@
 import React from 'react';
-import {LoadHeader, WView} from '../../../shared/themed';
+import {ScrollView, View, StyleSheet} from 'react-native';
+import {LoadHeader, WView, WText} from '../../../shared/themed';
 import {HeaderComponent} from '../../header';
 import useAppColor from '../../../shared/colors/use-color';
 import {arrowLeftIcon} from '../../button';
@@ -10,13 +11,16 @@ import {useAppDispatch, useAppSelector} from '../../../shared/redux/hooks';
 import {fetchUserMessages} from '../../../shared/redux/actions/user-messages';
 import {fetchUsers} from '../../../shared/redux/actions/users';
 import {formatLastOnlineTime} from '../../../utils/online-format';
-import {ScrollView, View, StyleSheet} from 'react-native';
 import MessageItem from './chat-message-item';
+import {formatLastMessagesGroupTime} from '../../../utils/time-format';
+import {borderRadius, spacing} from '../../../shared/sizes';
 
 const dotsIcon: TBaseIcon = {
   icon: icons.dots,
   onPress: () => null,
 };
+
+// Компонент для разделителя с датой
 
 const ChatMessagesRoute = React.memo((props: any) => {
   const appColor = useAppColor();
@@ -30,6 +34,17 @@ const ChatMessagesRoute = React.memo((props: any) => {
 
   const user = users.find(user => user.id === userId);
   const chatMessages = userMessages.find(chat => chat.senderId === userId);
+
+  const DateSeparator = ({date}: {date: string}) => (
+    <View style={styles.dateSeparator}>
+      <WText
+        variant="C1"
+        // customColor="base_secondary_light"
+      >
+        {date}
+      </WText>
+    </View>
+  );
 
   React.useEffect(() => {
     dispatch(fetchUsers());
@@ -52,6 +67,8 @@ const ChatMessagesRoute = React.memo((props: any) => {
       </View>
     );
   }
+
+  let lastMessageDate = '';
 
   return (
     <WView isParent>
@@ -79,13 +96,24 @@ const ChatMessagesRoute = React.memo((props: any) => {
         />
       )}
       <ScrollView
+        contentContainerStyle={{paddingBottom: spacing.lg}}
         style={[
           styles.scrollContent,
           {backgroundColor: appColor.base_secondary_normal},
         ]}>
-        {chatMessages?.messages.map((message, index) => (
-          <MessageItem key={index} message={message} />
-        ))}
+        {chatMessages?.messages.map((message, index) => {
+          const messageDate = formatLastMessagesGroupTime(message.timestamp);
+          const showDateSeparator = messageDate !== lastMessageDate;
+
+          lastMessageDate = messageDate;
+
+          return (
+            <React.Fragment key={index}>
+              {showDateSeparator && <DateSeparator date={messageDate} />}
+              <MessageItem message={message} />
+            </React.Fragment>
+          );
+        })}
       </ScrollView>
     </WView>
   );
@@ -99,7 +127,16 @@ const styles = StyleSheet.create({
     height: '8%',
   },
   scrollContent: {
-    padding: 16,
+    padding: spacing.lg,
+  },
+  dateSeparator: {
+    paddingVertical: spacing.sm,
+    paddingHorizontal: spacing.lg,
+    alignSelf: 'center',
+    borderRadius: 55,
+    // backgroundColor: 'rgba(0, 0, 0, 0.1)',
+    alignItems: 'center',
+    marginBottom: spacing.md,
   },
 });
 

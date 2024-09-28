@@ -34,6 +34,27 @@ export const formatLastMessageTime = (dateString: string): string => {
   }
 };
 
+export const formatLastMessagesGroupTime = (dateString: string): string => {
+  moment.locale('ru');
+
+  const date = moment(dateString);
+  const today = moment().startOf('day');
+  const yesterday = moment().subtract(1, 'day').startOf('day');
+  const weekAgo = moment().subtract(7, 'days').startOf('day');
+
+  if (date.isSame(today, 'day')) {
+    return 'Сегодня'; // "Сегодня"
+  } else if (date.isSame(yesterday, 'day')) {
+    return 'Вчера'; // "Вчера"
+  } else if (date.isAfter(weekAgo)) {
+    return date.format('dddd'); // "Пятница"
+  } else if (date.isSame(today, 'year')) {
+    return date.format('D MMMM'); // "17 сен"
+  } else {
+    return date.format('DD.MM.YY'); // "02.08.22"
+  }
+};
+
 export const formaHoursMinutesTime = (dateString: string): string => {
   return new Date(dateString).toLocaleTimeString([], {
     hour: '2-digit',
