@@ -1,6 +1,6 @@
-import React from 'react';
+import React, {useRef, useEffect} from 'react';
 import {ScrollView, View, StyleSheet} from 'react-native';
-import {LoadHeader, WView, WText} from '../../../shared/themed';
+import {WView, WText} from '../../../shared/themed';
 import {HeaderComponent} from '../../header';
 import useAppColor from '../../../shared/colors/use-color';
 import {arrowLeftIcon} from '../../button';
@@ -13,14 +13,12 @@ import {fetchUsers} from '../../../shared/redux/actions/users';
 import {formatLastOnlineTime} from '../../../utils/online-format';
 import MessageItem from './chat-message-item';
 import {formatLastMessagesGroupTime} from '../../../utils/time-format';
-import {borderRadius, spacing} from '../../../shared/sizes';
+import {spacing} from '../../../shared/sizes';
 
 const dotsIcon: TBaseIcon = {
   icon: icons.dots,
   onPress: () => null,
 };
-
-// Компонент для разделителя с датой
 
 const ChatMessagesRoute = React.memo((props: any) => {
   const appColor = useAppColor();
@@ -35,21 +33,24 @@ const ChatMessagesRoute = React.memo((props: any) => {
   const user = users.find(user => user.id === userId);
   const chatMessages = userMessages.find(chat => chat.senderId === userId);
 
+  const scrollViewRef = useRef<ScrollView>(null);
+
   const DateSeparator = ({date}: {date: string}) => (
     <View style={styles.dateSeparator}>
-      <WText
-        variant="C1"
-        // customColor="base_secondary_light"
-      >
-        {date}
-      </WText>
+      <WText variant="C1">{date}</WText>
     </View>
   );
 
-  React.useEffect(() => {
+  useEffect(() => {
     dispatch(fetchUsers());
     dispatch(fetchUserMessages());
   }, [dispatch]);
+
+  useEffect(() => {
+    if (chatMessages && scrollViewRef.current) {
+      scrollViewRef.current.scrollToEnd({animated: true});
+    }
+  }, [chatMessages]);
 
   if (usersLoading || messagesLoading) {
     return (
@@ -68,7 +69,7 @@ const ChatMessagesRoute = React.memo((props: any) => {
     );
   }
 
-  let lastMessageDate = '';
+  const addedDates = new Set();
 
   return (
     <WView isParent>
@@ -96,21 +97,60 @@ const ChatMessagesRoute = React.memo((props: any) => {
         />
       )}
       <ScrollView
-        contentContainerStyle={{paddingBottom: spacing.lg}}
+        ref={scrollViewRef}
+        contentContainerStyle={{paddingBottom: spacing.xl}}
         style={[
           styles.scrollContent,
           {backgroundColor: appColor.base_secondary_normal},
+          // {backgroundColor: '#27154c'},
         ]}>
         {chatMessages?.messages.map((message, index) => {
-          const messageDate = formatLastMessagesGroupTime(message.timestamp);
-          const showDateSeparator = messageDate !== lastMessageDate;
+          const previousMessage = chatMessages.messages[index - 1];
+          const nextMessage = chatMessages.messages[index + 1];
 
-          lastMessageDate = messageDate;
+          const isSameSenderPrevious =
+            previousMessage && previousMessage.senderId === message.senderId;
+          const isSameDayPrevious =
+            previousMessage &&
+            formatLastMessagesGroupTime(previousMessage.timestamp) ===
+              formatLastMessagesGroupTime(message.timestamp);
+
+          const isSameSenderNext =
+            nextMessage && nextMessage.senderId === message.senderId;
+          const isSameDayNext =
+            nextMessage &&
+            formatLastMessagesGroupTime(nextMessage.timestamp) ===
+              formatLastMessagesGroupTime(message.timestamp);
+
+          const isFirstInGroup = !(isSameSenderPrevious && isSameDayPrevious);
+          const isLastInGroup = !(isSameSenderNext && isSameDayNext);
+
+          const messageDate = formatLastMessagesGroupTime(message.timestamp);
+          const showDateSeparator =
+            isFirstInGroup && !addedDates.has(messageDate);
+
+          if (showDateSeparator) {
+            addedDates.add(messageDate);
+          }
+
+          const isDifferentSender =
+            previousMessage && previousMessage.senderId !== message.senderId;
+          const marginTop = isDifferentSender ? spacing.md : 0;
 
           return (
             <React.Fragment key={index}>
-              {showDateSeparator && <DateSeparator date={messageDate} />}
-              <MessageItem message={message} />
+              {showDateSeparator && (
+                <DateSeparator
+                  date={formatLastMessagesGroupTime(message.timestamp)}
+                />
+              )}
+              <View style={{marginTop}}>
+                <MessageItem
+                  message={message}
+                  isFirstInGroup={isFirstInGroup}
+                  isLastInGroup={isLastInGroup}
+                />
+              </View>
             </React.Fragment>
           );
         })}
@@ -134,9 +174,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: spacing.lg,
     alignSelf: 'center',
     borderRadius: 55,
-    // backgroundColor: 'rgba(0, 0, 0, 0.1)',
     alignItems: 'center',
-    marginBottom: spacing.md,
+    marginBottom: spacing.sm,
   },
 });
 
