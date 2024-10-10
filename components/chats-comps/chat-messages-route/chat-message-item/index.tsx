@@ -1,11 +1,13 @@
 import React from 'react';
 import {View, StyleSheet} from 'react-native';
-import {WText} from '../../../shared/themed';
-import {borderRadius, spacing} from '../../../shared/sizes';
-import {formaHoursMinutesTime} from '../../../utils/time-format';
-import useAppColor from '../../../shared/colors/use-color';
-import {MY_ID} from '../../../shared/constants';
-import icons from '../../../shared/icons';
+import {WText} from '../../../../shared/themed';
+import {borderRadius, spacing} from '../../../../shared/sizes';
+import {formaHoursMinutesTime} from '../../../../utils/time-format';
+import useAppColor from '../../../../shared/colors/use-color';
+import {MY_ID} from '../../../../shared/constants';
+import icons from '../../../../shared/icons';
+
+import {styles} from './styles';
 
 interface MessageItemProps {
   message: any;
@@ -59,10 +61,13 @@ const MessageItem: React.FC<MessageItemProps> = ({
           ? {
               backgroundColor: appColor.brand_primary_normal,
               alignSelf: 'flex-end',
+              paddingLeft: spacing.lg,
+              paddingRight: spacing.md,
             }
           : {
               backgroundColor: appColor.base_secondary_light,
               alignSelf: 'flex-start',
+              paddingHorizontal: spacing.lg,
             },
       ]}>
       <View
@@ -105,51 +110,5 @@ const MessageItem: React.FC<MessageItemProps> = ({
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  messageContainer: {
-    shadowOffset: {width: 4, height: 4},
-    marginBottom: spacing.xxs,
-    paddingHorizontal: spacing.lg,
-    paddingVertical: spacing.md,
-    borderRadius: borderRadius.md,
-    maxWidth: '88%',
-    position: 'relative',
-  },
-  theirTab: {
-    position: 'absolute',
-    bottom: 0,
-    left: -7,
-    width: 20,
-    height: 10,
-    borderTopLeftRadius: 8,
-    borderBottomLeftRadius: 14,
-    borderBottomRightRadius: 6,
-  },
-  myTab: {
-    position: 'absolute',
-    bottom: 0,
-    right: -7,
-    width: 20,
-    height: 10,
-    borderTopRightRadius: 8,
-    borderBottomRightRadius: 14,
-    borderBottomLeftRadius: 6,
-  },
-  timeWrapper: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    position: 'absolute',
-    right: 1,
-    bottom: 1,
-  },
-  // timeText: {
-  //   marginLeft: 2,
-  // },
-  messageText: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-  },
-});
 
 export default MessageItem;

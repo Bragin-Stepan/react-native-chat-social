@@ -42,7 +42,8 @@ export interface IProfileItemProps {
   whenWasOnline?: string;
   isOnline: boolean;
   customSubTitle?: StyleProp<TextStyle>;
-  titleRight?: string;
+  titleUpRight?: string;
+  arrTitleUpRight?: [any, string];
   countMessage?: number;
   onPress?: () => void;
 }

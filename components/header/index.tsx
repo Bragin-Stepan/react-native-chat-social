@@ -5,7 +5,7 @@ import {IconsRow, WText} from '../../shared/themed';
 import {spacing} from '../../shared/sizes';
 import {IHeaderProps} from '../../shared/types';
 import HeaderSearch from './header-search';
-import {ProfileItem} from '../shared/profile-item';
+import {ProfileItem} from '../chats-comps/chat-messages-route/profile-chat-item';
 
 const HeaderComponent = React.memo((props: IHeaderProps) => {
   return (

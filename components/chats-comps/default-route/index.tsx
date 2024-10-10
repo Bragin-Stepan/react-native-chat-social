@@ -2,7 +2,7 @@ import React, {useEffect, useState, useCallback} from 'react';
 import {ScrollView, View} from 'react-native';
 import {LoadHeader, WView} from '../../../shared/themed';
 import {HeaderComponent} from '../../header';
-import {ProfileItem} from '../../shared/profile-item';
+import {ProfileItem} from '../chat-messages-route/profile-chat-item/index.tsx';
 import icons from '../../../shared/icons';
 import {spacing} from '../../../shared/sizes';
 import {formatLastMessageTime} from '../../../utils/time-format';
@@ -116,9 +116,19 @@ const DefaultRoute = React.memo((props: any) => {
               isOnline={user.isOnline}
               avatar={user.avatar}
               subTitle={(user as any).lastMessage}
-              titleRight={formatLastMessageTime(
-                String((user as any).lastMessageTime),
-              )}
+              // titleUpRight={formatLastMessageTime(
+              //   String((user as any).lastMessageTime),
+              // )}
+
+              arrTitleUpRight={[
+                (user as any).lastMessageSenderId === user.id
+                  ? null
+                  : (user as any).isRead
+                  ? icons.chat_check_read
+                  : icons.chat_check_delivered,
+
+                formatLastMessageTime(String((user as any).lastMessageTime)),
+              ]}
               countMessage={getUnreadMessagesCount(user.id, userMessages)}
               onPress={() =>
                 props.navigation.navigate('chatPage', {userId: user.id})

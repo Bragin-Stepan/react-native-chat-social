@@ -16,8 +16,18 @@ export const getSortedUsers = (
         userChat?.messages[userChat.messages.length - 1]?.timestamp || null;
       const lastMessage =
         userChat?.messages[userChat.messages.length - 1]?.content || '';
+      const lastMessageSenderId =
+        userChat?.messages[userChat.messages.length - 1]?.senderId || null;
+      const isRead =
+        userChat?.messages[userChat.messages.length - 1]?.isRead || null;
 
-      return {...user, lastMessageTime, lastMessage};
+      return {
+        ...user,
+        lastMessageTime,
+        lastMessage,
+        lastMessageSenderId,
+        isRead,
+      };
     })
     .sort((a, b) => {
       if (!a.lastMessageTime) return 1;

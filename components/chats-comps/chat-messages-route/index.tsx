@@ -6,7 +6,7 @@ import useAppColor from '../../../shared/colors/use-color';
 import {arrowLeftIcon} from '../../button';
 import icons from '../../../shared/icons';
 import {TBaseIcon} from '../../../shared/types';
-import {ProfileItem} from '../../shared/profile-item';
+import {ProfileItem} from './profile-chat-item';
 import {useAppDispatch, useAppSelector} from '../../../shared/redux/hooks';
 import {fetchUserMessages} from '../../../shared/redux/actions/user-messages';
 import {fetchUsers} from '../../../shared/redux/actions/users';
@@ -98,7 +98,7 @@ const ChatMessagesRoute = React.memo((props: any) => {
       )}
       <ScrollView
         ref={scrollViewRef}
-        contentContainerStyle={{paddingBottom: spacing.xl}}
+        // contentContainerStyle={{paddingBottom: spacing.xl}}
         style={[
           styles.scrollContent,
           {backgroundColor: appColor.base_secondary_normal},
@@ -167,7 +167,7 @@ const styles = StyleSheet.create({
     height: '8%',
   },
   scrollContent: {
-    padding: spacing.lg,
+    paddingHorizontal: spacing.lg,
   },
   dateSeparator: {
     paddingVertical: spacing.sm,

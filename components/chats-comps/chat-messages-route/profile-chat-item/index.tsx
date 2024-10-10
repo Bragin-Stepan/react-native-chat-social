@@ -1,9 +1,9 @@
 import React from 'react';
 import {StyleSheet, View, Image, TouchableOpacity} from 'react-native';
-import {WText} from '../../shared/fonts';
-import {spacing} from '../../shared/sizes';
-import useAppColor from '../../shared/colors/use-color';
-import {IProfileItemProps} from '../../shared/types';
+import {WText} from '../../../../shared/fonts';
+import {spacing} from '../../../../shared/sizes';
+import useAppColor from '../../../../shared/colors/use-color';
+import {IProfileItemProps} from '../../../../shared/types';
 
 export const ProfileItem = React.memo((props: IProfileItemProps) => {
   const appColor = useAppColor();
@@ -54,13 +54,33 @@ export const ProfileItem = React.memo((props: IProfileItemProps) => {
         </View>
       </View>
       <View style={styles.countContainer}>
-        {props.titleRight && (
+        {props.titleUpRight && (
           <WText
             variant="C1"
             customColor="base_primary_light"
             style={styles.titleRightText}>
-            {props.titleRight}
+            {props.titleUpRight}
           </WText>
+        )}
+        {props.arrTitleUpRight && (
+          <View
+            style={{
+              minWidth: 80,
+              flexDirection: 'row',
+              justifyContent: 'flex-end',
+              alignItems: 'center',
+              gap: spacing.xs,
+            }}>
+            {props.arrTitleUpRight[0]}
+            <WText
+              variant="C1"
+              customColor="base_primary_light"
+              style={{textAlign: 'right'}}
+              // style={styles.titleRightText}
+            >
+              {props.arrTitleUpRight[1]}
+            </WText>
+          </View>
         )}
         {props.countMessage && props.countMessage >= 0 ? (
           <View
@@ -121,6 +141,7 @@ const styles = StyleSheet.create({
     flex: 1,
     textAlign: 'right',
     minWidth: 80,
+    // backgroundColor: 'red',
   },
   countBubble: {
     borderRadius: 30,
